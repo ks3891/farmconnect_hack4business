@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import '../../widgets/common/sustainability_badge_display.dart';
+import '../../services/sustainability_service.dart';
 
 class FarmerDashboard extends StatelessWidget {
   final String farmerName;
@@ -14,6 +16,8 @@ class FarmerDashboard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final int sustainabilityScore = 65;
+
     return Scaffold(
       appBar: AppBar(
         title: const Text('Farmer Dashboard'),
@@ -22,45 +26,85 @@ class FarmerDashboard extends StatelessWidget {
           IconButton(
             icon: const Icon(Icons.logout),
             onPressed: () {
-              Navigator.pushReplacementNamed(context, '/'); // Logout to login page
+              Navigator.pushReplacementNamed(context, '/');
             },
           ),
         ],
       ),
       body: Padding(
         padding: const EdgeInsets.all(20),
-        child: GridView.count(
-          crossAxisCount: 2,
-          crossAxisSpacing: 16,
-          mainAxisSpacing: 16,
+        child: Column(
           children: [
-            _buildDashboardCard(
-              icon: Icons.add_circle,
-              label: 'Add New Crops',
-              color: Colors.green,
-              onTap: onAddCropTap,
+            _buildSustainabilityOverview(context, sustainabilityScore),
+            const SizedBox(height: 20),
+            Expanded(
+              child: GridView.count(
+                crossAxisCount: 2,
+                crossAxisSpacing: 16,
+                mainAxisSpacing: 16,
+                children: [
+                  _buildDashboardCard(
+                    icon: Icons.add_circle,
+                    label: 'Add New Crops',
+                    color: Colors.green,
+                    onTap: onAddCropTap,
+                  ),
+                  _buildDashboardCard(
+                    icon: Icons.list_alt,
+                    label: 'My Crops',
+                    color: Colors.orange,
+                    onTap: onMyCropsTap,
+                  ),
+                  _buildDashboardCard(
+                    icon: Icons.shopping_bag,
+                    label: 'Orders',
+                    color: Colors.blue,
+                    onTap: () {
+                      Navigator.pushNamed(context, '/farmer/orders');
+                    },
+                  ),
+                  _buildDashboardCard(
+                    icon: Icons.person,
+                    label: 'Profile',
+                    color: Colors.purple,
+                    onTap: () {
+                      Navigator.pushNamed(context, '/farmer/profile');
+                    },
+                  ),
+                ],
+              ),
             ),
-            _buildDashboardCard(
-              icon: Icons.list_alt,
-              label: 'My Crops',
-              color: Colors.orange,
-              onTap: onMyCropsTap,
+          ],
+        ),
+      ),
+    );
+  }
+
+  Widget _buildSustainabilityOverview(BuildContext context, int score) {
+    return Card(
+      elevation: 4,
+      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
+      child: Padding(
+        padding: const EdgeInsets.all(16),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            const Text(
+              'Your Sustainability Status',
+              style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
             ),
-            _buildDashboardCard(
-              icon: Icons.shopping_bag,
-              label: 'Orders',
-              color: Colors.blue,
-              onTap: () {
-                Navigator.pushNamed(context, '/farmer/orders');
+            const SizedBox(height: 10),
+            SustainabilityBadgeDisplay(
+              sustainabilityScore: score,
+              showScore: true,
+              compact: false,
+            ),
+            const SizedBox(height: 10),
+            TextButton(
+              onPressed: () {
+                Navigator.pushNamed(context, '/sustainability-settings');
               },
-            ),
-            _buildDashboardCard(
-              icon: Icons.person,
-              label: 'Profile',
-              color: Colors.purple,
-              onTap: () {
-                Navigator.pushNamed(context, '/farmer/profile');
-              },
+              child: const Text('Update Sustainable Practices'),
             ),
           ],
         ),

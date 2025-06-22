@@ -1,12 +1,15 @@
 import 'package:flutter/material.dart';
-import '../utils/order_store.dart'; // Make sure this path is correct
+import '../utils/order_store.dart'; // Adjust this import if needed
 
 class FarmerOrderScreen extends StatelessWidget {
   const FarmerOrderScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
-    // Get current orders from memory (no backend)
+    // ✅ Mock list of verified buyers
+    final List<String> verifiedBuyers = ['Ramesh', 'Sita', 'buyer123'];
+
+    // ✅ Get current orders
     final List<Map<String, dynamic>> orders = List.from(OrderStore.getOrders());
 
     return Scaffold(
@@ -22,6 +25,16 @@ class FarmerOrderScreen extends StatelessWidget {
               itemCount: orders.length,
               itemBuilder: (context, index) {
                 final order = orders[index];
+
+                // ✅ Safely extract buyer name
+                final String buyerName = (order['buyerName'] ?? '')
+                    .toString()
+                    .trim();
+                final bool isVerified = verifiedBuyers.contains(buyerName);
+
+                // ✅ Debug print
+                print("DEBUG: Buyer: $buyerName, Verified: $isVerified");
+
                 return Card(
                   margin: const EdgeInsets.symmetric(
                     horizontal: 16,
@@ -33,17 +46,33 @@ class FarmerOrderScreen extends StatelessWidget {
                       color: Colors.green,
                     ),
                     title: Text(order['crop'] ?? ''),
-                    subtitle: Text(
-                      "Buyer: ${order['buyerName'] ?? ''}\n"
-                      "Quantity: ${order['quantity'] ?? ''}\n"
-                      "Status: ${order['status'] ?? ''}",
+                    subtitle: Text.rich(
+                      TextSpan(
+                        children: [
+                          TextSpan(text: "Buyer: $buyerName"),
+                          if (isVerified)
+                            const TextSpan(
+                              text: "  ✔ Verified",
+                              style: TextStyle(
+                                color: Colors.green,
+                                fontWeight: FontWeight.bold,
+                              ),
+                            ),
+                          const TextSpan(text: "\n"),
+                          TextSpan(
+                            text: "Quantity: ${order['quantity'] ?? ''}\n",
+                          ),
+                          TextSpan(text: "Status: ${order['status'] ?? ''}"),
+                        ],
+                      ),
                     ),
                     trailing: IconButton(
                       icon: const Icon(Icons.delete, color: Colors.red),
                       onPressed: () {
-                        // Remove order from global store
+                        // ✅ Remove order
                         OrderStore.removeOrderAt(index);
-                        // Rebuild the screen by navigating back and forth
+
+                        // ✅ Rebuild screen
                         Navigator.pushReplacement(
                           context,
                           PageRouteBuilder(

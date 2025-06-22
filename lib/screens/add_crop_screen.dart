@@ -15,6 +15,24 @@ class _AddCropScreenState extends State<AddCropScreen> {
   final _price = TextEditingController();
   final _quantity = TextEditingController();
 
+  String? _suggestedPrice;
+  Map<String, String> mockPrices = {
+    'Tomato': '40',
+    'Potato': '35',
+    'Carrot': '50',
+    'Cauliflower': '45',
+    'Cabbage': '30',
+  };
+
+  void _updateSuggestedPrice(String cropName) {
+    setState(() {
+      _suggestedPrice = mockPrices[cropName];
+      if (_suggestedPrice != null) {
+        _price.text = _suggestedPrice!;
+      }
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -25,11 +43,53 @@ class _AddCropScreenState extends State<AddCropScreen> {
           key: _formKey,
           child: ListView(
             children: [
-              _buildInput(_cropName, "Crop Name", Icons.agriculture),
+              // Crop name with suggestion
+              TextFormField(
+                controller: _cropName,
+                decoration: InputDecoration(
+                  prefixIcon: const Icon(Icons.agriculture),
+                  labelText: "Crop Name",
+                  border: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(10),
+                  ),
+                ),
+                onChanged: (value) {
+                  _updateSuggestedPrice(value.trim());
+                },
+                validator: (value) {
+                  if (value == null || value.trim().isEmpty) {
+                    return 'Please enter Crop Name';
+                  }
+                  return null;
+                },
+              ),
+
+              if (_suggestedPrice != null)
+                Padding(
+                  padding: const EdgeInsets.only(top: 8.0, bottom: 8.0),
+                  child: Text(
+                    "💡 Suggested Price: Rs. $_suggestedPrice per kg",
+                    style: const TextStyle(
+                      fontWeight: FontWeight.bold,
+                      color: Colors.green,
+                    ),
+                  ),
+                ),
+
               const SizedBox(height: 16),
-              _buildInput(_quantity, "Quantity (kg)", Icons.scale, isNumber: true),
+              _buildInput(
+                _quantity,
+                "Quantity (kg)",
+                Icons.scale,
+                isNumber: true,
+              ),
               const SizedBox(height: 16),
-              _buildInput(_price, "Price per kg (Rs)", Icons.money, isNumber: true),
+              _buildInput(
+                _price,
+                "Price per kg (Rs)",
+                Icons.money,
+                isNumber: true,
+              ),
               const SizedBox(height: 30),
               ElevatedButton(
                 onPressed: () {
@@ -46,7 +106,7 @@ class _AddCropScreenState extends State<AddCropScreen> {
                   }
                 },
                 child: const Text("Add Crop"),
-              )
+              ),
             ],
           ),
         ),
@@ -54,7 +114,12 @@ class _AddCropScreenState extends State<AddCropScreen> {
     );
   }
 
-  Widget _buildInput(TextEditingController controller, String label, IconData icon, {bool isNumber = false}) {
+  Widget _buildInput(
+    TextEditingController controller,
+    String label,
+    IconData icon, {
+    bool isNumber = false,
+  }) {
     return TextFormField(
       controller: controller,
       keyboardType: isNumber ? TextInputType.number : TextInputType.text,
