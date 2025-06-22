@@ -24,6 +24,8 @@ import 'screens/cart_screen.dart';
 import 'screens/order_history_screen.dart';
 import 'screens/buyer_profile_screen.dart';
 import 'screens/farmer_detail_screen.dart';
+import 'screens/crop_recommendation_screen.dart';
+import 'screens/forgot_password_screen.dart';
 
 void main() {
   runApp(const FarmConnectApp());
@@ -126,6 +128,8 @@ class _FarmConnectAppState extends State<FarmConnectApp> {
         '/buyer/cart': (context) => MyCartScreen(cartItems: _buyerCart),
         '/buyer/order-history': (context) => const OrderHistoryScreen(),
         '/buyer/profile': (context) => const BuyerProfileScreen(),
+        '/recommendations': (context) => const CropRecommendationScreen(),
+        '/forgot-password': (context) => const ForgotPasswordScreen(),
       },
     );
   }

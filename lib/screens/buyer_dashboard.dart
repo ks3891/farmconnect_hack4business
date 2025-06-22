@@ -66,6 +66,16 @@ class BuyerDashboard extends StatelessWidget {
                 Navigator.pushNamed(context, '/buyer/profile');
               },
             ),
+
+            _buildDashboardCard(
+              context,
+              icon: Icons.map,
+              title: 'Crop Recommendations',
+              subtitle: 'Get suggestions by region',
+              onTap: () {
+                Navigator.pushNamed(context, '/recommendations');
+              },
+            ),
           ],
         ),
       ),

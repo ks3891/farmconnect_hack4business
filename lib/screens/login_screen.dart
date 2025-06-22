@@ -95,11 +95,14 @@ class _LoginScreenState extends State<LoginScreen> {
               ),
               TextButton(
                 onPressed: () {
+                   Navigator.pushNamed(context, '/forgot-password');
                   ScaffoldMessenger.of(context).showSnackBar(
                     const SnackBar(
                       content: Text("Password reset not implemented"),
+                      
                     ),
                   );
+                  
                 },
                 child: const Text("Forgot Password?"),
               ),
