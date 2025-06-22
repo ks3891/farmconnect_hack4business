@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 
 class AddCropScreen extends StatefulWidget {
-  const AddCropScreen({super.key});
+  final Function(Map<String, dynamic>) onAddCrop;
+
+  const AddCropScreen({super.key, required this.onAddCrop});
 
   @override
   State<AddCropScreen> createState() => _AddCropScreenState();
@@ -32,7 +34,11 @@ class _AddCropScreenState extends State<AddCropScreen> {
               ElevatedButton(
                 onPressed: () {
                   if (_formKey.currentState!.validate()) {
-                    // TODO: Save crop to backend or state
+                    widget.onAddCrop({
+                      'name': _cropName.text,
+                      'quantity': int.parse(_quantity.text),
+                      'price': int.parse(_price.text),
+                    });
                     ScaffoldMessenger.of(context).showSnackBar(
                       const SnackBar(content: Text('Crop added successfully!')),
                     );

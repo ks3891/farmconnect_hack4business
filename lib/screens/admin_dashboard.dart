@@ -33,7 +33,7 @@ class AdminDashboard extends StatelessWidget {
               title: 'Manage Users',
               subtitle: 'View and manage buyers and suppliers',
               onTap: () {
-                 Navigator.pushNamed(context, '/admin/users');
+                Navigator.pushNamed(context, '/admin/users');
                 // TODO: Navigate to Manage Users screen
               },
             ),

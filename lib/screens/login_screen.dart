@@ -39,18 +39,19 @@ class _LoginScreenState extends State<LoginScreen> {
               const SizedBox(height: 40),
               _buildTextField(_emailController, 'Email', Icons.email),
               const SizedBox(height: 16),
-              _buildTextField(_passwordController, 'Password', Icons.lock, isPassword: true),
+              _buildTextField(
+                _passwordController,
+                'Password',
+                Icons.lock,
+                isPassword: true,
+              ),
               const SizedBox(height: 16),
 
-              // 🔽 Updated Dropdown with Admin Role
               DropdownButtonFormField<String>(
                 value: _selectedRole,
                 hint: const Text('Select Role'),
-                items: ['Buyer', 'Supplier', 'Admin'].map((role) {
-                  return DropdownMenuItem(
-                    value: role,
-                    child: Text(role),
-                  );
+                items: ['Admin', 'Buyer', 'Supplier'].map((role) {
+                  return DropdownMenuItem(value: role, child: Text(role));
                 }).toList(),
                 onChanged: (value) {
                   setState(() {
@@ -58,10 +59,15 @@ class _LoginScreenState extends State<LoginScreen> {
                   });
                 },
                 decoration: InputDecoration(
-                  border: OutlineInputBorder(borderRadius: BorderRadius.circular(10)),
+                  border: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(10),
+                  ),
                   filled: true,
                   fillColor: Colors.white,
-                  contentPadding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
+                  contentPadding: const EdgeInsets.symmetric(
+                    horizontal: 12,
+                    vertical: 8,
+                  ),
                 ),
               ),
 
@@ -83,14 +89,17 @@ class _LoginScreenState extends State<LoginScreen> {
               const SizedBox(height: 12),
               TextButton(
                 onPressed: () {
-                  // Navigate to Create Account screen
                   Navigator.pushNamed(context, '/create-account');
-  },
+                },
                 child: const Text("Create Account"),
               ),
               TextButton(
                 onPressed: () {
-                  // Navigate to Forgot Password screen
+                  ScaffoldMessenger.of(context).showSnackBar(
+                    const SnackBar(
+                      content: Text("Password reset not implemented"),
+                    ),
+                  );
                 },
                 child: const Text("Forgot Password?"),
               ),
@@ -101,7 +110,12 @@ class _LoginScreenState extends State<LoginScreen> {
     );
   }
 
-  Widget _buildTextField(TextEditingController controller, String label, IconData icon, {bool isPassword = false}) {
+  Widget _buildTextField(
+    TextEditingController controller,
+    String label,
+    IconData icon, {
+    bool isPassword = false,
+  }) {
     return TextField(
       controller: controller,
       obscureText: isPassword,
@@ -121,19 +135,19 @@ class _LoginScreenState extends State<LoginScreen> {
 
     if (email.isEmpty || password.isEmpty || _selectedRole == null) {
       ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(content: Text('Please fill all fields and select a role')),
+        const SnackBar(
+          content: Text('Please fill all fields and select a role'),
+        ),
       );
       return;
     }
 
-    // TODO: Implement authentication logic
-
-    if (_selectedRole == 'Buyer') {
-      Navigator.pushNamed(context, '/buyer');
+    if (_selectedRole == 'Admin') {
+      Navigator.pushReplacementNamed(context, '/admin');
+    } else if (_selectedRole == 'Buyer') {
+      Navigator.pushReplacementNamed(context, '/buyer');
     } else if (_selectedRole == 'Supplier') {
-      Navigator.pushNamed(context, '/farmer');
-    } else if (_selectedRole == 'Admin') {
-      Navigator.pushNamed(context, '/admin');
+      Navigator.pushReplacementNamed(context, '/farmer');
     }
   }
 }

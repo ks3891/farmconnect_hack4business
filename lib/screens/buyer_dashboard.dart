@@ -33,7 +33,7 @@ class BuyerDashboard extends StatelessWidget {
               title: 'Browse Crops',
               subtitle: 'Find fresh produce from local farmers',
               onTap: () {
-                // TODO: Navigate to browse crops screen
+                Navigator.pushNamed(context, '/buyer/browse');
               },
             ),
 
@@ -43,7 +43,7 @@ class BuyerDashboard extends StatelessWidget {
               title: 'My Cart',
               subtitle: 'View crops you’ve added to your cart',
               onTap: () {
-                // TODO: Navigate to cart screen
+                Navigator.pushNamed(context, '/buyer/cart');
               },
             ),
 
@@ -53,7 +53,7 @@ class BuyerDashboard extends StatelessWidget {
               title: 'Order History',
               subtitle: 'View your past orders',
               onTap: () {
-                // TODO: Navigate to order history screen
+                Navigator.pushNamed(context, '/buyer/order-history');
               },
             ),
 
@@ -63,7 +63,7 @@ class BuyerDashboard extends StatelessWidget {
               title: 'Profile',
               subtitle: 'View and edit your profile information',
               onTap: () {
-                // TODO: Navigate to profile screen
+                Navigator.pushNamed(context, '/buyer/profile');
               },
             ),
           ],

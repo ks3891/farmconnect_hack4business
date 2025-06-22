@@ -1,13 +1,9 @@
 import 'package:flutter/material.dart';
 
 class MyCropsScreen extends StatelessWidget {
-  const MyCropsScreen({super.key});
+  final List<Map<String, dynamic>> crops;
 
-  // Example crop list (replace with real data)
-  final List<Map<String, dynamic>> crops = const [
-    {'name': 'Tomato', 'quantity': 50, 'price': 80},
-    {'name': 'Cabbage', 'quantity': 30, 'price': 60},
-  ];
+  const MyCropsScreen({super.key, required this.crops});
 
   @override
   Widget build(BuildContext context) {
@@ -25,7 +21,7 @@ class MyCropsScreen extends StatelessWidget {
                     leading: const Icon(Icons.eco, color: Colors.green),
                     title: Text(crop['name']),
                     subtitle: Text(
-                      "Qty: ${crop['quantity']} kg\nPrice: Rs. ${crop['price']}/kg",
+                      "Qty: \${crop['quantity']} kg\nPrice: Rs. \${crop['price']}/kg",
                     ),
                     isThreeLine: true,
                   ),

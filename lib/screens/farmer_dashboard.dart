@@ -1,7 +1,16 @@
 import 'package:flutter/material.dart';
 
 class FarmerDashboard extends StatelessWidget {
-  const FarmerDashboard({super.key});
+  final String farmerName;
+  final VoidCallback onAddCropTap;
+  final VoidCallback onMyCropsTap;
+
+  const FarmerDashboard({
+    super.key,
+    required this.farmerName,
+    required this.onAddCropTap,
+    required this.onMyCropsTap,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -9,6 +18,14 @@ class FarmerDashboard extends StatelessWidget {
       appBar: AppBar(
         title: const Text('Farmer Dashboard'),
         centerTitle: true,
+        actions: [
+          IconButton(
+            icon: const Icon(Icons.logout),
+            onPressed: () {
+              Navigator.pushReplacementNamed(context, '/'); // Logout to login page
+            },
+          ),
+        ],
       ),
       body: Padding(
         padding: const EdgeInsets.all(20),
@@ -21,17 +38,13 @@ class FarmerDashboard extends StatelessWidget {
               icon: Icons.add_circle,
               label: 'Add New Crops',
               color: Colors.green,
-              onTap: () {
-                Navigator.pushNamed(context, '/add-crop');
-              },
+              onTap: onAddCropTap,
             ),
             _buildDashboardCard(
               icon: Icons.list_alt,
               label: 'My Crops',
               color: Colors.orange,
-              onTap: () {
-                Navigator.pushNamed(context, '/my-crops');
-              },
+              onTap: onMyCropsTap,
             ),
             _buildDashboardCard(
               icon: Icons.shopping_bag,
