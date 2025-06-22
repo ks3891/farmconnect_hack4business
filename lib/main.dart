@@ -5,6 +5,13 @@ import 'screens/farmer_profile_screen.dart';
 import 'screens/add_crop_screen.dart';
 import 'screens/my_crops_screen.dart';
 import 'screens/farmer_order_screen.dart';
+import 'screens/admin_dashboard.dart'; // Add this import
+import 'screens/manage_users_screen.dart';
+import 'screens/crops_overview_screen.dart';
+import 'screens/admin_reports_screen.dart';
+import 'screens/create_account_screen.dart';
+
+
 
 void main() {
   runApp(const FarmConnectApp());
@@ -51,6 +58,16 @@ class FarmConnectApp extends StatelessWidget {
         '/add-crop': (context) => const AddCropScreen(),
         '/my-crops': (context) => const MyCropsScreen(),
         '/farmer/orders': (context) => const FarmerOrderScreen(),
+        '/admin': (context) => const AdminDashboard(),
+        '/admin/users': (context) => const ManageUsersScreen(),
+        '/admin/crops': (context) => const CropsOverviewScreen(),
+        '/admin/reports': (context) => const AdminReportsScreen(),
+        '/create-account': (context) => const CreateAccountScreen(),
+
+
+
+
+
 
         // Buyer and Admin dashboards can be added similarly when ready
       },

@@ -41,10 +41,12 @@ class _LoginScreenState extends State<LoginScreen> {
               const SizedBox(height: 16),
               _buildTextField(_passwordController, 'Password', Icons.lock, isPassword: true),
               const SizedBox(height: 16),
+
+              // 🔽 Updated Dropdown with Admin Role
               DropdownButtonFormField<String>(
                 value: _selectedRole,
                 hint: const Text('Select Role'),
-                items: ['Buyer', 'Supplier'].map((role) {
+                items: ['Buyer', 'Supplier', 'Admin'].map((role) {
                   return DropdownMenuItem(
                     value: role,
                     child: Text(role),
@@ -62,6 +64,7 @@ class _LoginScreenState extends State<LoginScreen> {
                   contentPadding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
                 ),
               ),
+
               const SizedBox(height: 24),
               SizedBox(
                 width: double.infinity,
@@ -81,7 +84,8 @@ class _LoginScreenState extends State<LoginScreen> {
               TextButton(
                 onPressed: () {
                   // Navigate to Create Account screen
-                },
+                  Navigator.pushNamed(context, '/create-account');
+  },
                 child: const Text("Create Account"),
               ),
               TextButton(
@@ -128,6 +132,8 @@ class _LoginScreenState extends State<LoginScreen> {
       Navigator.pushNamed(context, '/buyer');
     } else if (_selectedRole == 'Supplier') {
       Navigator.pushNamed(context, '/farmer');
+    } else if (_selectedRole == 'Admin') {
+      Navigator.pushNamed(context, '/admin');
     }
   }
 }
