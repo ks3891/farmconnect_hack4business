@@ -10,6 +10,7 @@ import 'screens/farmer_profile_screen.dart';
 import 'screens/add_crop_screen.dart';
 import 'screens/my_crops_screen.dart';
 import 'screens/farmer_order_screen.dart';
+import 'screens/sustainability_settings_screen.dart'; // ✅ Added
 
 // Admin Screens
 import 'screens/admin_dashboard.dart';
@@ -24,8 +25,6 @@ import 'screens/cart_screen.dart';
 import 'screens/order_history_screen.dart';
 import 'screens/buyer_profile_screen.dart';
 import 'screens/farmer_detail_screen.dart';
-import 'screens/crop_recommendation_screen.dart';
-import 'screens/forgot_password_screen.dart';
 
 void main() {
   runApp(const FarmConnectApp());
@@ -128,8 +127,10 @@ class _FarmConnectAppState extends State<FarmConnectApp> {
         '/buyer/cart': (context) => MyCartScreen(cartItems: _buyerCart),
         '/buyer/order-history': (context) => const OrderHistoryScreen(),
         '/buyer/profile': (context) => const BuyerProfileScreen(),
-        '/recommendations': (context) => const CropRecommendationScreen(),
-        '/forgot-password': (context) => const ForgotPasswordScreen(),
+
+        // ✅ New Sustainability Settings Route
+        '/sustainability-settings': (context) =>
+            const SustainabilitySettingsScreen(),
       },
     );
   }
