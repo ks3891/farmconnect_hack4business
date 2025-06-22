@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 // Shared Screens
 import 'screens/login_screen.dart';
 import 'screens/create_account_screen.dart';
+import 'screens/forgot_password_screen.dart'; // ✅ Added import
 
 // Farmer Screens
 import 'screens/farmer_dashboard.dart';
@@ -10,7 +11,7 @@ import 'screens/farmer_profile_screen.dart';
 import 'screens/add_crop_screen.dart';
 import 'screens/my_crops_screen.dart';
 import 'screens/farmer_order_screen.dart';
-import 'screens/sustainability_settings_screen.dart'; // ✅ Added
+import 'screens/sustainability_settings_screen.dart';
 
 // Admin Screens
 import 'screens/admin_dashboard.dart';
@@ -26,8 +27,11 @@ import 'screens/order_history_screen.dart';
 import 'screens/buyer_profile_screen.dart';
 import 'screens/farmer_detail_screen.dart';
 
-// ✅ Newly imported your CropRecommendationScreen
+// Others
 import 'screens/crop_recommendation_screen.dart';
+
+// ✅ Import SplashScreen
+import 'screens/splash_screen.dart';
 
 void main() {
   runApp(const FarmConnectApp());
@@ -85,11 +89,12 @@ class _FarmConnectAppState extends State<FarmConnectApp> {
           ),
         ),
       ),
-      initialRoute: '/',
-      routes: {
-        '/': (context) => const LoginScreen(),
-        '/create-account': (context) => const CreateAccountScreen(),
+      home: const SplashScreen(),
 
+      routes: {
+        '/create-account': (context) => const CreateAccountScreen(),
+        '/forgot-password': (context) =>
+            const ForgotPasswordScreen(), // ✅ Route added
         // Farmer Routes
         '/farmer': (context) => FarmerDashboard(
           farmerName: currentFarmerName,
@@ -131,11 +136,9 @@ class _FarmConnectAppState extends State<FarmConnectApp> {
         '/buyer/order-history': (context) => const OrderHistoryScreen(),
         '/buyer/profile': (context) => const BuyerProfileScreen(),
 
-        // ✅ New Sustainability Settings Route
+        // Other Routes
         '/sustainability-settings': (context) =>
             const SustainabilitySettingsScreen(),
-
-        // ✅ New Crop Recommendation Route (this was missing)
         '/recommendations': (context) => const CropRecommendationScreen(),
       },
     );
