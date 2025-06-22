@@ -8,7 +8,9 @@ plugins {
 android {
     namespace = "com.example.hacker"
     compileSdk = flutter.compileSdkVersion
-    ndkVersion = flutter.ndkVersion
+
+    // Set NDK version explicitly as required by the speech_to_text plugin
+    ndkVersion = "27.0.12077973"
 
     compileOptions {
         sourceCompatibility = JavaVersion.VERSION_11
