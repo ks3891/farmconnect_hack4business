@@ -1,4 +1,47 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/material.dart';
+import '../widgets/voice_input_widget.dart';
+
+class SearchCropScreen extends StatefulWidget {
+  const SearchCropScreen({super.key});
+
+  @override
+  State<SearchCropScreen> createState() => _SearchCropScreenState();
+}
+
+class _SearchCropScreenState extends State<SearchCropScreen> {
+  final TextEditingController _searchController = TextEditingController();
+
+  void _handleVoiceInput(String text) {
+    setState(() {
+      _searchController.text = text;
+      // You can also trigger search logic here
+    });
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(title: const Text("Search Crops")),
+      body: Padding(
+        padding: const EdgeInsets.all(16),
+        child: Column(
+          children: [
+            TextField(
+              controller: _searchController,
+              decoration: const InputDecoration(
+                labelText: 'Search crop',
+                border: OutlineInputBorder(),
+              ),
+            ),
+            const SizedBox(height: 10),
+            VoiceInputWidget(onResult: _handleVoiceInput),
+          ],
+        ),
+      ),
+    );
+  }
+}
 
 class SearchCropsScreen extends StatefulWidget {
   const SearchCropsScreen({super.key});
