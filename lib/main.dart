@@ -26,6 +26,9 @@ import 'screens/order_history_screen.dart';
 import 'screens/buyer_profile_screen.dart';
 import 'screens/farmer_detail_screen.dart';
 
+// ✅ Newly imported your CropRecommendationScreen
+import 'screens/crop_recommendation_screen.dart';
+
 void main() {
   runApp(const FarmConnectApp());
 }
@@ -131,6 +134,9 @@ class _FarmConnectAppState extends State<FarmConnectApp> {
         // ✅ New Sustainability Settings Route
         '/sustainability-settings': (context) =>
             const SustainabilitySettingsScreen(),
+
+        // ✅ New Crop Recommendation Route (this was missing)
+        '/recommendations': (context) => const CropRecommendationScreen(),
       },
     );
   }

@@ -9,13 +9,19 @@ dependencies:
   flutter:
     sdk: flutter
   cupertino_icons: ^1.0.2
-  speech_to_text: ^6.3.0  # ✅ Add your new package here
+  speech_to_text: ^6.3.0
 
 dev_dependencies:
   flutter_test:
     sdk: flutter
+  flutter_launcher_icons: ^0.13.1
 
 flutter:
   uses-material-design: true
   assets:
-    - assets/images/
+    - assets/
+
+flutter_launcher_icons:
+  android: true
+  ios: true
+  image_path: "assets/images.png"
