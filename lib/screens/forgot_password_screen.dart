@@ -21,7 +21,11 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
             ? Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: const [
-                  Icon(Icons.check_circle_outline, color: Colors.green, size: 80),
+                  Icon(
+                    Icons.check_circle_outline,
+                    color: Colors.green,
+                    size: 80,
+                  ),
                   SizedBox(height: 16),
                   Text(
                     "Password reset link sent to your email.",
@@ -31,6 +35,7 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
                 ],
               )
             : Column(
+                mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   const Text(
                     "Enter your email to reset your password",
