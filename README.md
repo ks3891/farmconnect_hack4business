@@ -47,8 +47,8 @@
 1. **Install Flutter:** [Flutter Setup Guide](https://flutter.dev/docs/get-started/install)
 2. **Clone the Repository:**  
    ```sh
-   git clone <repo-url>
-   cd <repo-folder>
+   git clone https://github.com/ks3891/farmconnect_hack4business
+   cd farmconnect_hack4business 
    ```
 3. **Install Dependencies:**  
    ```sh
