@@ -62,11 +62,5 @@
 
 
 
-## **Team**
-
-- **Lead Developer & Designer:** ks3891
-- **Contributors:** [Add team members]
-- **Contact:** [Your email or GitHub]
-
 
 ---
