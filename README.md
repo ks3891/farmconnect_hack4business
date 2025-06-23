@@ -11,7 +11,7 @@
 ## **Key Features**
 
 - **Role-Based Dashboards:**  
-  Tailored experiences for Buyers, Farmers, and (future) Admins, each with business-focused tools.
+  Tailored experiences for Buyers, Farmers, and Admins, each with business-focused tools.
 - **Crop Marketplace:**  
   Buyers can browse, filter by region, and discover fresh crops from verified local farmers.
 - **Smart Cart & Order Management:**  
