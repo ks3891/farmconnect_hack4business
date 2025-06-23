@@ -26,9 +26,9 @@ class _ManageUsersScreenState extends State<ManageUsersScreen> {
     // TODO: Replace this with real fetch logic (e.g., Firebase, Supabase)
     setState(() {
       users = [
-        {'name': 'Amit Buyer', 'role': 'Buyer', 'email': 'amit@example.com'},
-        {'name': 'Sita Farmer', 'role': 'Supplier', 'email': 'sita@example.com'},
-        {'name': 'John Buyer', 'role': 'Buyer', 'email': 'john@example.com'},
+        {'name': 'अमित क्रेता', 'role': 'क्रेता', 'email': 'amit@example.com'},
+        {'name': 'सीता किसान', 'role': 'आपूर्तिकर्ता', 'email': 'sita@example.com'},
+        {'name': 'जोन क्रेता', 'role': 'क्रेता', 'email': 'john@example.com'},
       ];
       isLoading = false;
     });
@@ -43,18 +43,18 @@ class _ManageUsersScreenState extends State<ManageUsersScreen> {
     });
 
     ScaffoldMessenger.of(context).showSnackBar(
-      SnackBar(content: Text('${deletedUser['name']} deleted')),
+      SnackBar(content: Text('${deletedUser['name']} हटाइयो')),
     );
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: const Text('Manage Users')),
+      appBar: AppBar(title: const Text('प्रयोगकर्ता व्यवस्थापन')),
       body: isLoading
           ? const Center(child: CircularProgressIndicator())
           : users.isEmpty
-              ? const Center(child: Text("No users found."))
+              ? const Center(child: Text("प्रयोगकर्ता फेला परेनन्।"))
               : ListView.builder(
                   itemCount: users.length,
                   itemBuilder: (context, index) {
@@ -63,7 +63,7 @@ class _ManageUsersScreenState extends State<ManageUsersScreen> {
                       margin: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
                       child: ListTile(
                         leading: Icon(
-                          user['role'] == 'Buyer'
+                          user['role'] == 'क्रेता'
                               ? Icons.shopping_cart
                               : Icons.agriculture,
                           color: Colors.green,

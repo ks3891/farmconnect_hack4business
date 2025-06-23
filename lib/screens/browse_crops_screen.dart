@@ -52,7 +52,7 @@ class _BrowseCropsScreenState extends State<BrowseCropsScreen> {
     if (selectedCrop != null) {
       widget.onAddToCart(selectedCrop);
       ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(content: Text('${selectedCrop['name']} added to cart')),
+        SnackBar(content: Text('${selectedCrop['name']} कार्टमा थपियो')),
       );
     }
   }
@@ -61,7 +61,7 @@ class _BrowseCropsScreenState extends State<BrowseCropsScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Browse Crops'),
+        title: const Text('बालीहरू हेर्नुहोस्'),
       ),
       body: Padding(
         padding: const EdgeInsets.all(16),
@@ -71,7 +71,7 @@ class _BrowseCropsScreenState extends State<BrowseCropsScreen> {
               controller: _searchController,
               decoration: InputDecoration(
                 prefixIcon: const Icon(Icons.search),
-                hintText: 'Search for crops...',
+                hintText: 'बाली खोज्नुहोस्...',
                 border: OutlineInputBorder(
                   borderRadius: BorderRadius.circular(12),
                 ),
@@ -82,7 +82,7 @@ class _BrowseCropsScreenState extends State<BrowseCropsScreen> {
             const SizedBox(height: 20),
             Expanded(
               child: _filteredCrops.isEmpty
-                  ? const Center(child: Text('No crops found.'))
+                  ? const Center(child: Text('कुनै बाली फेला परेन।'))
                   : ListView.builder(
                       itemCount: _filteredCrops.length,
                       itemBuilder: (context, index) {
@@ -97,7 +97,7 @@ class _BrowseCropsScreenState extends State<BrowseCropsScreen> {
                             leading: const Icon(Icons.local_florist,
                                 color: Colors.green),
                             title: Text(crop['name']),
-                            subtitle: Text("Rs. ${crop['price']}/kg"),
+                            subtitle: Text("रु. ${crop['price']}/के.जि."),
                             trailing: const Icon(Icons.arrow_forward_ios),
                             onTap: () => _navigateToFarmerDetail(crop),
                           ),

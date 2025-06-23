@@ -17,7 +17,7 @@ class _SustainabilitySettingsScreenState
   void saveSettings() {
     // Here you can add actual save logic if needed.
     ScaffoldMessenger.of(context).showSnackBar(
-      const SnackBar(content: Text('Sustainable Practices Updated')),
+      const SnackBar(content: Text('दिगो अभ्यासहरू अपडेट गरियो')),
     );
     Navigator.pop(context); // Go back after saving
   }
@@ -25,13 +25,13 @@ class _SustainabilitySettingsScreenState
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: const Text('Sustainability Settings')),
+      appBar: AppBar(title: const Text('दिगोपन सम्बन्धी सेटिङहरू')),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
         child: Column(
           children: [
             CheckboxListTile(
-              title: const Text('Organic Farming'),
+              title: const Text('जैविक कृषि'),
               value: organicFarming,
               onChanged: (bool? value) {
                 setState(() {
@@ -40,7 +40,7 @@ class _SustainabilitySettingsScreenState
               },
             ),
             CheckboxListTile(
-              title: const Text('Water Conservation'),
+              title: const Text('पानी संरक्षण'),
               value: waterConservation,
               onChanged: (bool? value) {
                 setState(() {
@@ -49,7 +49,7 @@ class _SustainabilitySettingsScreenState
               },
             ),
             CheckboxListTile(
-              title: const Text('Renewable Energy Usage'),
+              title: const Text('नवीकरणीय ऊर्जा प्रयोग'),
               value: renewableEnergy,
               onChanged: (bool? value) {
                 setState(() {
@@ -60,7 +60,7 @@ class _SustainabilitySettingsScreenState
             const SizedBox(height: 20),
             ElevatedButton(
               onPressed: saveSettings,
-              child: const Text('Save Sustainable Practices'),
+              child: const Text('दिगो अभ्यासहरू सुरक्षित गर्नुहोस्'),
             ),
           ],
         ),

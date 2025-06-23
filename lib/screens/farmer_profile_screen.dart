@@ -54,7 +54,7 @@ class _FarmerProfileScreenState extends State<FarmerProfileScreen> {
       if (isEditing) {
         // You can connect this to backend to save changes
         ScaffoldMessenger.of(context).showSnackBar(
-          const SnackBar(content: Text('Profile updated successfully')),
+          const SnackBar(content: Text('प्रोफाइल सफलतापूर्वक अपडेट भयो।')),
         );
       }
       isEditing = !isEditing;
@@ -65,7 +65,7 @@ class _FarmerProfileScreenState extends State<FarmerProfileScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text("Farmer Profile"),
+        title: const Text("कृषक प्रोफाइल"),
         actions: [
           IconButton(
             icon: Icon(isEditing ? Icons.save : Icons.edit),
@@ -77,18 +77,18 @@ class _FarmerProfileScreenState extends State<FarmerProfileScreen> {
         padding: const EdgeInsets.all(20),
         child: Column(
           children: [
-            _buildEditableField("Name", nameController),
-            _buildEditableField("Email", emailController),
-            _buildEditableField("Phone", phoneController),
-            _buildEditableField("Location", locationController),
-            _buildEditableField("Crops Grown", cropsController),
+            _buildEditableField("नाम", nameController),
+            _buildEditableField("इमेल", emailController),
+            _buildEditableField("फोन नम्बर", phoneController),
+            _buildEditableField("ठेगाना", locationController),
+            _buildEditableField("खेती गरिएका बालीहरू", cropsController),
             const SizedBox(height: 30),
             ElevatedButton.icon(
               onPressed: () {
                 Navigator.pushReplacementNamed(context, '/');
               },
               icon: const Icon(Icons.logout),
-              label: const Text("Logout"),
+              label: const Text("लगआउट"),
               style: ElevatedButton.styleFrom(
                 backgroundColor: Colors.redAccent,
                 padding: const EdgeInsets.symmetric(vertical: 14, horizontal: 24),
@@ -108,7 +108,7 @@ class _FarmerProfileScreenState extends State<FarmerProfileScreen> {
         enabled: isEditing,
         decoration: InputDecoration(
           labelText: label,
-          border: OutlineInputBorder(),
+          border: const OutlineInputBorder(),
           filled: true,
           fillColor: isEditing ? Colors.white : Colors.grey[200],
         ),

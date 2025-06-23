@@ -13,11 +13,11 @@ class FarmerOrderScreen extends StatelessWidget {
     final List<Map<String, dynamic>> orders = List.from(OrderStore.getOrders());
 
     return Scaffold(
-      appBar: AppBar(title: const Text("Orders"), centerTitle: true),
+      appBar: AppBar(title: const Text("अर्डरहरू"), centerTitle: true),
       body: orders.isEmpty
           ? const Center(
               child: Text(
-                "No orders have been placed yet.",
+                "अहिलेसम्म कुनै अर्डर गरिएको छैन।",
                 style: TextStyle(fontSize: 16),
               ),
             )
@@ -49,10 +49,10 @@ class FarmerOrderScreen extends StatelessWidget {
                     subtitle: Text.rich(
                       TextSpan(
                         children: [
-                          TextSpan(text: "Buyer: $buyerName"),
+                          TextSpan(text: "ग्राहक: $buyerName"),
                           if (isVerified)
                             const TextSpan(
-                              text: "  ✔ Verified",
+                              text: "  ✔ प्रमाणित",
                               style: TextStyle(
                                 color: Colors.green,
                                 fontWeight: FontWeight.bold,
@@ -60,9 +60,9 @@ class FarmerOrderScreen extends StatelessWidget {
                             ),
                           const TextSpan(text: "\n"),
                           TextSpan(
-                            text: "Quantity: ${order['quantity'] ?? ''}\n",
+                            text: "परिमाण: ${order['quantity'] ?? ''}\n",
                           ),
-                          TextSpan(text: "Status: ${order['status'] ?? ''}"),
+                          TextSpan(text: "स्थिति: ${order['status'] ?? ''}"),
                         ],
                       ),
                     ),

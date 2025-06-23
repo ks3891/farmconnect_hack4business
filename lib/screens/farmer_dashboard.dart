@@ -1,30 +1,53 @@
 import 'package:flutter/material.dart';
 import '../../widgets/common/sustainability_badge_display.dart';
 import '../../services/sustainability_service.dart';
+import 'dart:math';
 
 class FarmerDashboard extends StatelessWidget {
   final String farmerName;
   final VoidCallback onAddCropTap;
   final VoidCallback onMyCropsTap;
 
-  const FarmerDashboard({
+  FarmerDashboard({
     super.key,
     required this.farmerName,
     required this.onAddCropTap,
     required this.onMyCropsTap,
   });
 
+  final List<String> _quotes = const [
+    "रुख रोप्न सबैभन्दा राम्रो समय २० वर्ष अगाडि थियो। दोस्रो राम्रो समय अहिले हो।",
+    "दिगोपन कुनै लक्ष्य होइन, सोच्ने तरिका हो।",
+    "स्वस्थ माटो, स्वस्थ जीवन।",
+    "माया गरेर उमार, गर्वले बटार।"
+  ];
+
   @override
   Widget build(BuildContext context) {
     final int sustainabilityScore = 65;
+    final today = DateTime.now();
+    final String dateStr =
+        "${today.day}/${today.month}/${today.year}";
+    final String quote = _quotes[Random().nextInt(_quotes.length)];
 
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Farmer Dashboard'),
+        title: const Text('कृषक ड्यासबोर्ड'),
         centerTitle: true,
         actions: [
           IconButton(
+            icon: const Icon(Icons.refresh),
+            tooltip: "रिफ्रेस गर्नुहोस्",
+            onPressed: () {
+              // In real apps, trigger reload logic here.
+              ScaffoldMessenger.of(context).showSnackBar(
+                const SnackBar(content: Text('ड्यासबोर्ड रिफ्रेस भयो!')),
+              );
+            },
+          ),
+          IconButton(
             icon: const Icon(Icons.logout),
+            tooltip: "लगआउट",
             onPressed: () {
               Navigator.pushReplacementNamed(context, '/');
             },
@@ -34,7 +57,24 @@ class FarmerDashboard extends StatelessWidget {
       body: Padding(
         padding: const EdgeInsets.all(20),
         child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
           children: [
+            Text(
+              "शुभदिन, $farmerName!",
+              style: const TextStyle(
+                fontSize: 22,
+                fontWeight: FontWeight.bold,
+              ),
+            ),
+            const SizedBox(height: 4),
+            Text(
+              "आज: $dateStr",
+              style: TextStyle(
+                fontSize: 14,
+                color: Colors.grey.shade700,
+              ),
+            ),
+            const SizedBox(height: 16),
             _buildSustainabilityOverview(context, sustainabilityScore),
             const SizedBox(height: 20),
             Expanded(
@@ -43,35 +83,47 @@ class FarmerDashboard extends StatelessWidget {
                 crossAxisSpacing: 16,
                 mainAxisSpacing: 16,
                 children: [
-                  _buildDashboardCard(
+                  _buildAnimatedDashboardCard(
                     icon: Icons.add_circle,
-                    label: 'Add New Crops',
+                    label: 'नयाँ बाली थप्नुहोस्',
                     color: Colors.green,
                     onTap: onAddCropTap,
                   ),
-                  _buildDashboardCard(
+                  _buildAnimatedDashboardCard(
                     icon: Icons.list_alt,
-                    label: 'My Crops',
+                    label: 'मेरो बालीहरू',
                     color: Colors.orange,
                     onTap: onMyCropsTap,
                   ),
-                  _buildDashboardCard(
+                  _buildAnimatedDashboardCard(
                     icon: Icons.shopping_bag,
-                    label: 'Orders',
+                    label: 'अर्डरहरू',
                     color: Colors.blue,
                     onTap: () {
                       Navigator.pushNamed(context, '/farmer/orders');
                     },
                   ),
-                  _buildDashboardCard(
+                  _buildAnimatedDashboardCard(
                     icon: Icons.person,
-                    label: 'Profile',
+                    label: 'प्रोफाइल',
                     color: Colors.purple,
                     onTap: () {
                       Navigator.pushNamed(context, '/farmer/profile');
                     },
                   ),
                 ],
+              ),
+            ),
+            const SizedBox(height: 10),
+            Center(
+              child: Text(
+                "\"$quote\"",
+                style: TextStyle(
+                  fontStyle: FontStyle.italic,
+                  color: Colors.teal.shade700,
+                  fontSize: 15,
+                ),
+                textAlign: TextAlign.center,
               ),
             ),
           ],
@@ -90,7 +142,7 @@ class FarmerDashboard extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             const Text(
-              'Your Sustainability Status',
+              'तपाईंको दिगोपन स्थिति',
               style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
             ),
             const SizedBox(height: 10),
@@ -104,10 +156,35 @@ class FarmerDashboard extends StatelessWidget {
               onPressed: () {
                 Navigator.pushNamed(context, '/sustainability-settings');
               },
-              child: const Text('Update Sustainable Practices'),
+              child: const Text('दिगो अभ्यासहरू अपडेट गर्नुहोस्'),
             ),
           ],
         ),
+      ),
+    );
+  }
+
+  Widget _buildAnimatedDashboardCard({
+    required IconData icon,
+    required String label,
+    required Color color,
+    required VoidCallback onTap,
+  }) {
+    return TweenAnimationBuilder<double>(
+      tween: Tween(begin: 0.95, end: 1.0),
+      duration: const Duration(milliseconds: 500),
+      curve: Curves.easeOutBack,
+      builder: (context, value, child) {
+        return Transform.scale(
+          scale: value,
+          child: child,
+        );
+      },
+      child: _buildDashboardCard(
+        icon: icon,
+        label: label,
+        color: color,
+        onTap: onTap,
       ),
     );
   }

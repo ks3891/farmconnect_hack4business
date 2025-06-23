@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'contact_supplier_screen.dart';
 
 class MyCartScreen extends StatefulWidget {
   final List<Map<String, dynamic>> cartItems;
@@ -18,14 +19,14 @@ class _MyCartScreenState extends State<MyCartScreen> {
     }
 
     return Scaffold(
-      appBar: AppBar(title: const Text('My Cart')),
+      appBar: AppBar(title: const Text('मेरो कार्ट')),
       body: Padding(
         padding: const EdgeInsets.all(16),
         child: Column(
           children: [
             Expanded(
               child: widget.cartItems.isEmpty
-                  ? const Center(child: Text('Your cart is empty.'))
+                  ? const Center(child: Text('तपाईंको कार्ट खाली छ।'))
                   : ListView.builder(
                       itemCount: widget.cartItems.length,
                       itemBuilder: (context, index) {
@@ -43,13 +44,13 @@ class _MyCartScreenState extends State<MyCartScreen> {
                             ),
                             title: Text(item['name']),
                             subtitle: Text(
-                              'Quantity: ${item['quantity']} kg\nPrice: Rs. ${item['price']} per kg',
+                              'परिमाण: ${item['quantity']} के.जि.\nमूल्य: रु. ${item['price']} प्रति के.जि.',
                             ),
                             trailing: Row(
                               mainAxisSize: MainAxisSize.min,
                               children: [
                                 Text(
-                                  'Rs. ${item['quantity'] * item['price']}',
+                                  'रु. ${item['quantity'] * item['price']}',
                                   style: const TextStyle(
                                     fontWeight: FontWeight.bold,
                                   ),
@@ -83,14 +84,14 @@ class _MyCartScreenState extends State<MyCartScreen> {
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         const Text(
-                          'Total',
+                          'कुल',
                           style: TextStyle(
                             fontSize: 18,
                             fontWeight: FontWeight.bold,
                           ),
                         ),
                         Text(
-                          'Rs. $totalPrice',
+                          'रु. $totalPrice',
                           style: const TextStyle(
                             fontSize: 18,
                             fontWeight: FontWeight.bold,
@@ -104,11 +105,22 @@ class _MyCartScreenState extends State<MyCartScreen> {
                       child: ElevatedButton.icon(
                         onPressed: () {
                           ScaffoldMessenger.of(context).showSnackBar(
-                            const SnackBar(content: Text('Order placed!')),
+                            const SnackBar(content: Text('अर्डर सफलतापूर्वक गरियो!')),
                           );
+                          // Add a short delay so the SnackBar shows
+                          Future.delayed(const Duration(milliseconds: 500), () {
+                            Navigator.pushReplacement(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) => ContactSupplierScreen(
+                                  orderedItems: List.from(widget.cartItems),
+                                ),
+                              ),
+                            );
+                          });
                         },
                         icon: const Icon(Icons.check_circle_outline),
-                        label: const Text('Place Order'),
+                        label: const Text('अर्डर गर्नुहोस्'),
                       ),
                     ),
                   ],

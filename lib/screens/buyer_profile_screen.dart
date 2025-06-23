@@ -19,10 +19,10 @@ class _BuyerProfileScreenState extends State<BuyerProfileScreen> {
   @override
   void initState() {
     super.initState();
-    nameController = TextEditingController(text: 'Amit Sharma');
+    nameController = TextEditingController(text: 'अमित शर्मा');
     emailController = TextEditingController(text: 'amit@example.com');
-    phoneController = TextEditingController(text: '+977 9812345678');
-    addressController = TextEditingController(text: 'Butwal, Rupandehi');
+    phoneController = TextEditingController(text: '+९७७ ९८१२३४५६७८');
+    addressController = TextEditingController(text: 'बुटवल, रुपन्देही');
   }
 
   @override
@@ -39,7 +39,7 @@ class _BuyerProfileScreenState extends State<BuyerProfileScreen> {
       if (isEditing) {
         // Save logic here (e.g., update DB)
         ScaffoldMessenger.of(context).showSnackBar(
-          const SnackBar(content: Text('Profile updated!')),
+          const SnackBar(content: Text('प्रोफाइल सफलतापूर्वक अपडेट भयो!')),
         );
       }
       isEditing = !isEditing;
@@ -64,7 +64,7 @@ class _BuyerProfileScreenState extends State<BuyerProfileScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Buyer Profile'),
+        title: const Text('क्रेता प्रोफाइल'),
         actions: [
           IconButton(
             icon: Icon(isEditing ? Icons.save : Icons.edit),
@@ -76,20 +76,20 @@ class _BuyerProfileScreenState extends State<BuyerProfileScreen> {
         padding: const EdgeInsets.all(16),
         child: ListView(
           children: [
-            _buildTextField('Full Name', nameController),
+            _buildTextField('पुरा नाम', nameController),
             const SizedBox(height: 16),
-            _buildTextField('Email', emailController),
+            _buildTextField('इमेल', emailController),
             const SizedBox(height: 16),
-            _buildTextField('Phone Number', phoneController),
+            _buildTextField('फोन नम्बर', phoneController),
             const SizedBox(height: 16),
-            _buildTextField('Address', addressController),
+            _buildTextField('ठेगाना', addressController),
             const SizedBox(height: 30),
             ElevatedButton.icon(
               onPressed: () {
                 Navigator.pushReplacementNamed(context, '/');
               },
               icon: const Icon(Icons.logout),
-              label: const Text('Logout'),
+              label: const Text('लगआउट'),
               style: ElevatedButton.styleFrom(
                 backgroundColor: Colors.redAccent,
               ),

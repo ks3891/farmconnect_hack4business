@@ -69,21 +69,21 @@ class _AdminReportsScreenState extends State<AdminReportsScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: const Text("Reports & Analytics")),
+      appBar: AppBar(title: const Text("रिपोर्ट र विश्लेषण")),
       body: isLoading
           ? const Center(child: CircularProgressIndicator())
           : Padding(
               padding: const EdgeInsets.all(16),
               child: Column(
                 children: [
-                  _buildStatCard("Total Users", totalUsers, Colors.blue),
+                  _buildStatCard("कुल प्रयोगकर्ता", totalUsers, Colors.blue),
                   const SizedBox(height: 16),
-                  _buildStatCard("Total Crops", totalCrops, Colors.green),
+                  _buildStatCard("कुल बालीहरू", totalCrops, Colors.green),
                   const SizedBox(height: 16),
-                  _buildStatCard("Total Orders", totalOrders, Colors.orange),
+                  _buildStatCard("कुल अर्डरहरू", totalOrders, Colors.orange),
                   const SizedBox(height: 30),
                   const Text(
-                    "More analytics coming soon...",
+                    "थप विश्लेषण चाँडै आउँदैछ...",
                     style: TextStyle(fontSize: 16, color: Colors.black54),
                   ),
                 ],

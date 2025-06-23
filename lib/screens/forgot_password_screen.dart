@@ -14,7 +14,7 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: const Text("Forgot Password")),
+      appBar: AppBar(title: const Text("पासवर्ड बिर्सनुभयो?")),
       body: Padding(
         padding: const EdgeInsets.all(16),
         child: _submitted
@@ -28,7 +28,7 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
                   ),
                   SizedBox(height: 16),
                   Text(
-                    "Password reset link sent to your email.",
+                    "पासवर्ड रिसेट लिंक तपाईंको इमेलमा पठाइएको छ।",
                     textAlign: TextAlign.center,
                     style: TextStyle(fontSize: 18),
                   ),
@@ -38,7 +38,7 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   const Text(
-                    "Enter your email to reset your password",
+                    "पासवर्ड रिसेट गर्न आफ्नो इमेल लेख्नुहोस्",
                     style: TextStyle(fontSize: 18),
                   ),
                   const SizedBox(height: 20),
@@ -46,7 +46,7 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
                     controller: _emailController,
                     keyboardType: TextInputType.emailAddress,
                     decoration: const InputDecoration(
-                      labelText: "Email",
+                      labelText: "इमेल",
                       border: OutlineInputBorder(),
                     ),
                   ),
@@ -57,7 +57,7 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
                         _submitted = true;
                       });
                     },
-                    child: const Text("Send Reset Link"),
+                    child: const Text("रिसेट लिंक पठाउनुहोस्"),
                   ),
                 ],
               ),

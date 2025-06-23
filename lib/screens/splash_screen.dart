@@ -39,6 +39,17 @@ class _SplashScreenState extends State<SplashScreen> {
                 color: Colors.green,
               ),
             ),
+            const SizedBox(height: 10),
+            const Text(
+              'किसान र उपभोक्तालाई जोड्ने',
+              style: TextStyle(
+                fontSize: 16,
+                color: Colors.black54,
+                fontWeight: FontWeight.w500,
+              ),
+            ),
+            const SizedBox(height: 30),
+            const CircularProgressIndicator(color: Colors.green),
           ],
         ),
       ),

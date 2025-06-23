@@ -7,22 +7,22 @@ class PlaceOrderScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: const Text("Place Order")),
+      appBar: AppBar(title: const Text("अर्डर गर्नुहोस्")),
       body: Center(
         child: ElevatedButton(
           onPressed: () {
             OrderStore.addOrder({
-              'crop': 'Tomatoes',
-              'buyerName': 'Ram Bahadur',
-              'quantity': '10kg',
-              'status': 'Pending',
+              'crop': 'गोलभेंडा',
+              'buyerName': 'राम बहादुर',
+              'quantity': '१० के.जि.',
+              'status': 'विचाराधीन',
             });
 
             ScaffoldMessenger.of(
               context,
-            ).showSnackBar(const SnackBar(content: Text("Order Placed")));
+            ).showSnackBar(const SnackBar(content: Text("अर्डर गरियो")));
           },
-          child: const Text("Place Order for Tomatoes"),
+          child: const Text("गोलभेंडाका लागि अर्डर गर्नुहोस्"),
         ),
       ),
     );

@@ -11,100 +11,119 @@ class _LoginScreenState extends State<LoginScreen> {
   final TextEditingController _emailController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
   String? _selectedRole;
+  bool _obscurePassword = true;
+
+  // Unique green color palette
+  static const Color _deepGreen = Color(0xFF227C49);
+  static const Color _accentGreen = Color(0xFF9FE870);
+  static const Color _inputGreen = Color(0xFFF2FFF6);
+  static const Color _borderGreen = Color(0xFF65B891);
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.green.shade50,
+      backgroundColor: _inputGreen,
       body: Center(
         child: SingleChildScrollView(
-          padding: const EdgeInsets.all(24),
+          padding: const EdgeInsets.all(28),
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              const Text(
-                'Welcome to FarmConnect',
+              // Simple logo avatar
+              CircleAvatar(
+                radius: 34,
+                backgroundColor: _accentGreen,
+                child: Icon(Icons.agriculture, color: _deepGreen, size: 38),
+              ),
+              const SizedBox(height: 20),
+              Text(
+                'FarmConnect मा स्वागत छ',
                 style: TextStyle(
-                  fontSize: 28,
+                  fontSize: 26,
                   fontWeight: FontWeight.bold,
-                  color: Colors.green,
+                  color: _deepGreen,
+                  letterSpacing: 0.5,
                 ),
               ),
-              const SizedBox(height: 10),
-              const Text(
-                'Bridging Farmers and Consumers with Technology',
+              const SizedBox(height: 9),
+              Text(
+                'किसान र उपभोक्तालाई प्रविधिमार्फत जोड्ने पुल',
                 textAlign: TextAlign.center,
-                style: TextStyle(fontSize: 16, color: Colors.black54),
-              ),
-              const SizedBox(height: 40),
-              _buildTextField(_emailController, 'Email', Icons.email),
-              const SizedBox(height: 16),
-              _buildTextField(
-                _passwordController,
-                'Password',
-                Icons.lock,
-                isPassword: true,
-              ),
-              const SizedBox(height: 16),
-
-              DropdownButtonFormField<String>(
-                value: _selectedRole,
-                hint: const Text('Select Role'),
-                items: ['Admin', 'Buyer', 'Supplier'].map((role) {
-                  return DropdownMenuItem(value: role, child: Text(role));
-                }).toList(),
-                onChanged: (value) {
-                  setState(() {
-                    _selectedRole = value;
-                  });
-                },
-                decoration: InputDecoration(
-                  border: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(10),
-                  ),
-                  filled: true,
-                  fillColor: Colors.white,
-                  contentPadding: const EdgeInsets.symmetric(
-                    horizontal: 12,
-                    vertical: 8,
-                  ),
+                style: TextStyle(
+                  fontSize: 15,
+                  color: _deepGreen.withOpacity(0.7),
+                  fontWeight: FontWeight.w500,
+                  letterSpacing: 0.2,
                 ),
               ),
-
-              const SizedBox(height: 24),
-              SizedBox(
-                width: double.infinity,
-                child: ElevatedButton(
-                  onPressed: _login,
-                  style: ElevatedButton.styleFrom(
-                    backgroundColor: Colors.green.shade700,
-                    padding: const EdgeInsets.symmetric(vertical: 14),
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(10),
+              const SizedBox(height: 36),
+              Container(
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(18),
+                  color: Colors.white,
+                  boxShadow: [
+                    BoxShadow(
+                      color: _deepGreen.withOpacity(0.07),
+                      blurRadius: 16,
+                      offset: const Offset(0, 12),
+                    )
+                  ],
+                ),
+                padding:
+                    const EdgeInsets.symmetric(horizontal: 22, vertical: 30),
+                child: Column(
+                  children: [
+                    _buildTextField(
+                        _emailController, 'इमेल', Icons.email_outlined),
+                    const SizedBox(height: 14),
+                    _buildPasswordField(),
+                    const SizedBox(height: 14),
+                    _buildRoleDropdown(),
+                    const SizedBox(height: 24),
+                    SizedBox(
+                      width: double.infinity,
+                      child: ElevatedButton(
+                        onPressed: _login,
+                        style: ElevatedButton.styleFrom(
+                          backgroundColor: _deepGreen,
+                          foregroundColor: Colors.white,
+                          padding: const EdgeInsets.symmetric(vertical: 14),
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(9),
+                          ),
+                          elevation: 2,
+                        ),
+                        child:
+                            const Text('लगइन', style: TextStyle(fontSize: 16)),
+                      ),
                     ),
-                  ),
-                  child: const Text('Login', style: TextStyle(fontSize: 16)),
+                  ],
                 ),
               ),
-              const SizedBox(height: 12),
+              const SizedBox(height: 17),
               TextButton(
                 onPressed: () {
                   Navigator.pushNamed(context, '/create-account');
                 },
-                child: const Text("Create Account"),
+                child: Text(
+                  "खाता सिर्जना गर्नुहोस्",
+                  style: TextStyle(
+                    color: _deepGreen,
+                    fontWeight: FontWeight.w600,
+                  ),
+                ),
               ),
               TextButton(
                 onPressed: () {
-                   Navigator.pushNamed(context, '/forgot-password');
-                  ScaffoldMessenger.of(context).showSnackBar(
-                    const SnackBar(
-                      content: Text("Password reset not implemented"),
-                      
-                    ),
-                  );
-                  
+                  Navigator.pushNamed(context, '/forgot-password');
                 },
-                child: const Text("Forgot Password?"),
+                child: Text(
+                  "पासवर्ड बिर्सनुभयो?",
+                  style: TextStyle(
+                    color: _deepGreen,
+                    fontWeight: FontWeight.w600,
+                  ),
+                ),
               ),
             ],
           ),
@@ -122,12 +141,98 @@ class _LoginScreenState extends State<LoginScreen> {
     return TextField(
       controller: controller,
       obscureText: isPassword,
+      style: const TextStyle(fontSize: 16),
       decoration: InputDecoration(
-        prefixIcon: Icon(icon, color: Colors.green),
+        prefixIcon: Icon(icon, color: _borderGreen),
         labelText: label,
+        labelStyle: TextStyle(color: _deepGreen, fontWeight: FontWeight.w500),
         filled: true,
-        fillColor: Colors.white,
-        border: OutlineInputBorder(borderRadius: BorderRadius.circular(10)),
+        fillColor: _inputGreen,
+        border: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(8),
+          borderSide: BorderSide(color: _borderGreen, width: 1),
+        ),
+        enabledBorder: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(8),
+          borderSide:
+              BorderSide(color: _borderGreen.withOpacity(0.35), width: 1),
+        ),
+        focusedBorder: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(8),
+          borderSide: BorderSide(color: _deepGreen, width: 1.5),
+        ),
+      ),
+    );
+  }
+
+  Widget _buildPasswordField() {
+    return TextField(
+      controller: _passwordController,
+      obscureText: _obscurePassword,
+      style: const TextStyle(fontSize: 16),
+      decoration: InputDecoration(
+        prefixIcon: const Icon(Icons.lock_outline, color: _borderGreen),
+        labelText: 'पासवर्ड',
+        labelStyle: TextStyle(color: _deepGreen, fontWeight: FontWeight.w500),
+        filled: true,
+        fillColor: _inputGreen,
+        border: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(8),
+          borderSide: BorderSide(color: _borderGreen, width: 1),
+        ),
+        enabledBorder: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(8),
+          borderSide:
+              BorderSide(color: _borderGreen.withOpacity(0.35), width: 1),
+        ),
+        focusedBorder: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(8),
+          borderSide: BorderSide(color: _deepGreen, width: 1.5),
+        ),
+        suffixIcon: IconButton(
+          icon: Icon(
+            _obscurePassword ? Icons.visibility_off : Icons.visibility,
+            color: _deepGreen,
+          ),
+          onPressed: () {
+            setState(() {
+              _obscurePassword = !_obscurePassword;
+            });
+          },
+        ),
+      ),
+    );
+  }
+
+  Widget _buildRoleDropdown() {
+    return DropdownButtonFormField<String>(
+      value: _selectedRole,
+      hint: const Text('भूमिका चयन गर्नुहोस्'),
+      items: ['प्रशासक', 'ग्राहक', 'कृषक'].map((role) {
+        return DropdownMenuItem(value: role, child: Text(role));
+      }).toList(),
+      onChanged: (value) {
+        setState(() {
+          _selectedRole = value;
+        });
+      },
+      decoration: InputDecoration(
+        border: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(8),
+          borderSide: BorderSide(color: _borderGreen, width: 1),
+        ),
+        enabledBorder: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(8),
+          borderSide:
+              BorderSide(color: _borderGreen.withOpacity(0.35), width: 1),
+        ),
+        focusedBorder: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(8),
+          borderSide: BorderSide(color: _deepGreen, width: 1.5),
+        ),
+        filled: true,
+        fillColor: _inputGreen,
+        contentPadding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
       ),
     );
   }
@@ -139,17 +244,18 @@ class _LoginScreenState extends State<LoginScreen> {
     if (email.isEmpty || password.isEmpty || _selectedRole == null) {
       ScaffoldMessenger.of(context).showSnackBar(
         const SnackBar(
-          content: Text('Please fill all fields and select a role'),
+          content:
+              Text('कृपया सबै क्षेत्रहरू भर्नुहोस् र भूमिका चयन गर्नुहोस्'),
         ),
       );
       return;
     }
 
-    if (_selectedRole == 'Admin') {
+    if (_selectedRole == 'प्रशासक') {
       Navigator.pushReplacementNamed(context, '/admin');
-    } else if (_selectedRole == 'Buyer') {
+    } else if (_selectedRole == 'ग्राहक') {
       Navigator.pushReplacementNamed(context, '/buyer');
-    } else if (_selectedRole == 'Supplier') {
+    } else if (_selectedRole == 'कृषक') {
       Navigator.pushReplacementNamed(context, '/farmer');
     }
   }

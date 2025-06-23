@@ -17,11 +17,11 @@ class _AddCropScreenState extends State<AddCropScreen> {
 
   String? _suggestedPrice;
   Map<String, String> mockPrices = {
-    'Tomato': '40',
-    'Potato': '35',
-    'Carrot': '50',
-    'Cauliflower': '45',
-    'Cabbage': '30',
+    'टमाटर': '४०',
+    'आलु': '३५',
+    'गाजर': '५०',
+    'काउली': '४५',
+    'बन्दा': '३०',
   };
 
   void _updateSuggestedPrice(String cropName) {
@@ -36,7 +36,7 @@ class _AddCropScreenState extends State<AddCropScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: const Text("Add New Crop")),
+      appBar: AppBar(title: const Text("नयाँ बाली थप्नुहोस्")),
       body: Padding(
         padding: const EdgeInsets.all(20),
         child: Form(
@@ -48,7 +48,7 @@ class _AddCropScreenState extends State<AddCropScreen> {
                 controller: _cropName,
                 decoration: InputDecoration(
                   prefixIcon: const Icon(Icons.agriculture),
-                  labelText: "Crop Name",
+                  labelText: "बालीको नाम",
                   border: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(10),
                   ),
@@ -58,7 +58,7 @@ class _AddCropScreenState extends State<AddCropScreen> {
                 },
                 validator: (value) {
                   if (value == null || value.trim().isEmpty) {
-                    return 'Please enter Crop Name';
+                    return 'कृपया बालीको नाम लेख्नुहोस्';
                   }
                   return null;
                 },
@@ -68,7 +68,7 @@ class _AddCropScreenState extends State<AddCropScreen> {
                 Padding(
                   padding: const EdgeInsets.only(top: 8.0, bottom: 8.0),
                   child: Text(
-                    "💡 Suggested Price: Rs. $_suggestedPrice per kg",
+                    "💡 सुझाव गरिएको मूल्य: रु. $_suggestedPrice प्रति के.जि.",
                     style: const TextStyle(
                       fontWeight: FontWeight.bold,
                       color: Colors.green,
@@ -79,14 +79,14 @@ class _AddCropScreenState extends State<AddCropScreen> {
               const SizedBox(height: 16),
               _buildInput(
                 _quantity,
-                "Quantity (kg)",
+                "परिमाण (के.जि.)",
                 Icons.scale,
                 isNumber: true,
               ),
               const SizedBox(height: 16),
               _buildInput(
                 _price,
-                "Price per kg (Rs)",
+                "प्रति के.जि. मूल्य (रु)",
                 Icons.money,
                 isNumber: true,
               ),
@@ -100,12 +100,12 @@ class _AddCropScreenState extends State<AddCropScreen> {
                       'price': int.parse(_price.text),
                     });
                     ScaffoldMessenger.of(context).showSnackBar(
-                      const SnackBar(content: Text('Crop added successfully!')),
+                      const SnackBar(content: Text('बाली सफलतापूर्वक थपियो!')),
                     );
                     Navigator.pop(context);
                   }
                 },
-                child: const Text("Add Crop"),
+                child: const Text("बाली थप्नुहोस्"),
               ),
             ],
           ),
@@ -130,7 +130,7 @@ class _AddCropScreenState extends State<AddCropScreen> {
       ),
       validator: (value) {
         if (value == null || value.trim().isEmpty) {
-          return 'Please enter $label';
+          return 'कृपया $label लेख्नुहोस्';
         }
         return null;
       },

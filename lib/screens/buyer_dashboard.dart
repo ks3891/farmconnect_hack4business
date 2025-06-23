@@ -7,7 +7,7 @@ class BuyerDashboard extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Buyer Dashboard'),
+        title: const Text('ग्राहक ड्यासबोर्ड'),
         actions: [
           IconButton(
             icon: const Icon(Icons.logout),
@@ -22,7 +22,7 @@ class BuyerDashboard extends StatelessWidget {
         child: ListView(
           children: [
             const Text(
-              'Welcome, Buyer!',
+              'स्वागत छ, क्रेता!',
               style: TextStyle(fontSize: 22, fontWeight: FontWeight.bold),
             ),
             const SizedBox(height: 20),
@@ -30,8 +30,8 @@ class BuyerDashboard extends StatelessWidget {
             _buildDashboardCard(
               context,
               icon: Icons.shopping_bag,
-              title: 'Browse Crops',
-              subtitle: 'Find fresh produce from local farmers',
+              title: 'बालीहरू हेर्नुहोस्',
+              subtitle: 'स्थानीय किसानबाट ताजा उत्पादन फेला पार्नुहोस्',
               onTap: () {
                 Navigator.pushNamed(context, '/buyer/browse');
               },
@@ -40,8 +40,8 @@ class BuyerDashboard extends StatelessWidget {
             _buildDashboardCard(
               context,
               icon: Icons.shopping_cart,
-              title: 'My Cart',
-              subtitle: 'View crops you’ve added to your cart',
+              title: 'मेरो कार्ट',
+              subtitle: 'तपाईंले कार्टमा थप्नुभएका बालीहरू हेर्नुहोस्',
               onTap: () {
                 Navigator.pushNamed(context, '/buyer/cart');
               },
@@ -50,8 +50,8 @@ class BuyerDashboard extends StatelessWidget {
             _buildDashboardCard(
               context,
               icon: Icons.history,
-              title: 'Order History',
-              subtitle: 'View your past orders',
+              title: 'अर्डर इतिहास',
+              subtitle: 'तपाईंका विगतका अर्डरहरू हेर्नुहोस्',
               onTap: () {
                 Navigator.pushNamed(context, '/buyer/order-history');
               },
@@ -60,8 +60,8 @@ class BuyerDashboard extends StatelessWidget {
             _buildDashboardCard(
               context,
               icon: Icons.person,
-              title: 'Profile',
-              subtitle: 'View and edit your profile information',
+              title: 'प्रोफाइल',
+              subtitle: 'आफ्नो प्रोफाइल जानकारी हेर्नुहोस् र सम्पादन गर्नुहोस्',
               onTap: () {
                 Navigator.pushNamed(context, '/buyer/profile');
               },
@@ -70,8 +70,8 @@ class BuyerDashboard extends StatelessWidget {
             _buildDashboardCard(
               context,
               icon: Icons.map,
-              title: 'Crop Recommendations',
-              subtitle: 'Get suggestions by region',
+              title: 'बाली सिफारिसहरू',
+              subtitle: 'क्षेत्र अनुसार सुझावहरू प्राप्त गर्नुहोस्',
               onTap: () {
                 Navigator.pushNamed(context, '/recommendations');
               },

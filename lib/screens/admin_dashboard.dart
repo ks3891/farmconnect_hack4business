@@ -7,7 +7,7 @@ class AdminDashboard extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Admin Dashboard'),
+        title: const Text('प्रशासक ड्यासबोर्ड'),
         actions: [
           IconButton(
             icon: const Icon(Icons.logout),
@@ -22,7 +22,7 @@ class AdminDashboard extends StatelessWidget {
         child: ListView(
           children: [
             const Text(
-              'Welcome, Admin!',
+              'स्वागत छ, प्रशासक!',
               style: TextStyle(fontSize: 22, fontWeight: FontWeight.bold),
             ),
             const SizedBox(height: 20),
@@ -30,33 +30,33 @@ class AdminDashboard extends StatelessWidget {
             _buildDashboardCard(
               context,
               icon: Icons.supervised_user_circle,
-              title: 'Manage Users',
-              subtitle: 'View and manage buyers and suppliers',
+              title: 'प्रयोगकर्ता व्यवस्थापन',
+              subtitle: 'क्रेता र आपूर्तिकर्ताहरूलाई हेर्नुहोस् र व्यवस्थापन गर्नुहोस्',
               onTap: () {
                 Navigator.pushNamed(context, '/admin/users');
-                // TODO: Navigate to Manage Users screen
+                // TODO: प्रयोगकर्ता व्यवस्थापन स्क्रीनमा जानुहोस्
               },
             ),
 
             _buildDashboardCard(
               context,
               icon: Icons.agriculture,
-              title: 'Crops Overview',
-              subtitle: 'See all crops listed on the platform',
+              title: 'बालीहरूको अवलोकन',
+              subtitle: 'प्ल्याटफर्ममा सूचीबद्ध सबै बालीहरू हेर्नुहोस्',
               onTap: () {
                 Navigator.pushNamed(context, '/admin/crops');
-                // TODO: Navigate to Crops Overview screen
+                // TODO: बालीहरूको अवलोकन स्क्रीनमा जानुहोस्
               },
             ),
 
             _buildDashboardCard(
               context,
               icon: Icons.analytics,
-              title: 'Reports & Analytics',
-              subtitle: 'Platform usage, orders, and statistics',
+              title: 'प्रतिवेदन र विश्लेषण',
+              subtitle: 'प्ल्याटफर्म प्रयोग, अर्डरहरू, र तथ्याङ्कहरू',
               onTap: () {
                 Navigator.pushNamed(context, '/admin/reports');
-                // TODO: Navigate to Reports screen
+                // TODO: प्रतिवेदन स्क्रीनमा जानुहोस्
               },
             ),
           ],

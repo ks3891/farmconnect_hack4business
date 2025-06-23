@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/material.dart';
 import '../widgets/voice_input_widget.dart';
 
 class SearchCropScreen extends StatefulWidget {
@@ -22,7 +21,7 @@ class _SearchCropScreenState extends State<SearchCropScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: const Text("Search Crops")),
+      appBar: AppBar(title: const Text("बाली खोज्नुहोस्")),
       body: Padding(
         padding: const EdgeInsets.all(16),
         child: Column(
@@ -30,7 +29,7 @@ class _SearchCropScreenState extends State<SearchCropScreen> {
             TextField(
               controller: _searchController,
               decoration: const InputDecoration(
-                labelText: 'Search crop',
+                labelText: 'बाली खोज्नुहोस्',
                 border: OutlineInputBorder(),
               ),
             ),
@@ -52,8 +51,8 @@ class SearchCropsScreen extends StatefulWidget {
 
 class _SearchCropsScreenState extends State<SearchCropsScreen> {
   final List<String> allCrops = [
-    'Tomato', 'Potato', 'Onion', 'Carrot', 'Cabbage', 'Spinach',
-    'Cauliflower', 'Chili', 'Pumpkin', 'Cucumber', 'Beans'
+    'गोलभेंडा', 'आलु', 'प्याज', 'गाजर', 'बन्दा', 'पालुङ्गो',
+    'काउली', 'खुर्सानी', 'फर्सी', 'काक्रो', 'सिमी'
   ];
 
   String searchQuery = '';
@@ -74,14 +73,14 @@ class _SearchCropsScreenState extends State<SearchCropsScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: const Text('Search Crops')),
+      appBar: AppBar(title: const Text('बाली खोज्नुहोस्')),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
         child: Column(
           children: [
             TextField(
               decoration: InputDecoration(
-                hintText: 'Search for crops...',
+                hintText: 'बाली खोज्नुहोस्...',
                 border: OutlineInputBorder(borderRadius: BorderRadius.circular(12)),
                 prefixIcon: const Icon(Icons.search),
               ),
@@ -93,10 +92,10 @@ class _SearchCropsScreenState extends State<SearchCropsScreen> {
             ),
             const SizedBox(height: 20),
             if (searchQuery.isNotEmpty) ...[
-              const Text('Search Results', style: TextStyle(fontWeight: FontWeight.bold)),
+              const Text('खोज परिणाम', style: TextStyle(fontWeight: FontWeight.bold)),
               ...filteredCrops.map((crop) => ListTile(title: Text(crop))),
               const SizedBox(height: 16),
-              const Text('You may also like', style: TextStyle(fontWeight: FontWeight.bold)),
+              const Text('तपाईंलाई यी पनि मनपर्न सक्छन्', style: TextStyle(fontWeight: FontWeight.bold)),
               ...recommendedCrops.map((crop) => ListTile(title: Text(crop))),
             ]
           ],

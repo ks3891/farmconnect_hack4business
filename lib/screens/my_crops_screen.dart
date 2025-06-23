@@ -8,9 +8,9 @@ class MyCropsScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: const Text("My Crops")),
+      appBar: AppBar(title: const Text("मेरो बालीहरू")),
       body: crops.isEmpty
-          ? const Center(child: Text("No crops added yet."))
+          ? const Center(child: Text("अहिलेसम्म कुनै बालीहरू थपिएको छैन।"))
           : ListView.builder(
               itemCount: crops.length,
               itemBuilder: (context, index) {
@@ -21,7 +21,7 @@ class MyCropsScreen extends StatelessWidget {
                     leading: const Icon(Icons.eco, color: Colors.green),
                     title: Text(crop['name']),
                     subtitle: Text(
-                      "Qty: \${crop['quantity']} kg\nPrice: Rs. \${crop['price']}/kg",
+                      "परिमाण: ${crop['quantity']} के.जि.\nमूल्य: रु. ${crop['price']}/के.जि.",
                     ),
                     isThreeLine: true,
                   ),

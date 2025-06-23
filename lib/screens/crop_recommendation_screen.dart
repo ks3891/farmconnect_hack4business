@@ -12,7 +12,7 @@ class _CropRecommendationScreenState extends State<CropRecommendationScreen> {
   String? _selectedRegion;
 
   final Map<String, List<Map<String, dynamic>>> regionData = {
-    'Terai': [
+    'तराई': [
       {
         'name': 'काउली',
         'price': 'Rs. 45/kg',
@@ -154,7 +154,7 @@ class _CropRecommendationScreenState extends State<CropRecommendationScreen> {
         'farmer': 'Bijaya Sah'
       },
     ],
-    'Hill': [
+    'पहाड': [
       {
         'name': 'टमाटर',
         'price': 'Rs. 50/kg',
@@ -296,7 +296,7 @@ class _CropRecommendationScreenState extends State<CropRecommendationScreen> {
         'farmer': 'Bijaya Pun'
       },
     ],
-    'Mountain': [
+    'हिमाल': [
       {
         'name': 'स्याउ',
         'price': 'Rs. 100/kg',
@@ -445,19 +445,19 @@ class _CropRecommendationScreenState extends State<CropRecommendationScreen> {
     final crops = _selectedRegion != null ? regionData[_selectedRegion!]! : [];
 
     return Scaffold(
-      appBar: AppBar(title: const Text("Regional Crop Recommendations")),
+      appBar: AppBar(title: const Text("बाली सिफारिसहरू")),
       body: Padding(
         padding: const EdgeInsets.all(16),
         child: Column(
           children: [
             const Text(
-              'Select Region',
+              'क्षेत्र छान्नुहोस्',
               style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
             ),
             const SizedBox(height: 12),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              children: ['Terai', 'Hill', 'Mountain'].map((region) {
+              children: ['तराई', 'पहाड', 'हिमाल'].map((region) {
                 final isSelected = _selectedRegion == region;
                 return GestureDetector(
                   onTap: () {
@@ -499,7 +499,7 @@ class _CropRecommendationScreenState extends State<CropRecommendationScreen> {
             const SizedBox(height: 20),
             Expanded(
               child: crops.isEmpty
-                  ? const Text('No crops to show. Select a region.')
+                  ? const Text('देखाउन कुनै बाली छैन। क्षेत्र छान्नुहोस्।')
                   : ListView.builder(
                       itemCount: crops.length,
                       itemBuilder: (context, index) {
