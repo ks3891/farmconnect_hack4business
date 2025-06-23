@@ -1,16 +1,72 @@
-# hacker
+#  **FarmConnect: Empowering Business in Nepali Agriculture**
 
-A new Flutter project.
+---
 
-## Getting Started
+## **Overview**
 
-This project is a starting point for a Flutter application.
+**FarmConnect** is an innovative Nepali-language mobile application developed for the **Business Hackathon 2025**. Our mission is to revolutionize the agricultural supply chain in Nepal by seamlessly connecting farmers and buyers through a digital marketplace. With FarmConnect, we unlock new business opportunities, foster transparency, and drive economic growth in the agri-sector.
 
-A few resources to get you started if this is your first Flutter project:
+---
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
+## **Key Features**
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+- **Role-Based Dashboards:**  
+  Tailored experiences for Buyers, Farmers, and (future) Admins, each with business-focused tools.
+- **Crop Marketplace:**  
+  Buyers can browse, filter by region, and discover fresh crops from verified local farmers.
+- **Smart Cart & Order Management:**  
+  Add items to cart, review purchase summary, and place orders in a few taps.
+- **Instant Supplier Contact:**  
+  After placing an order, buyers can call or chat with suppliers for rapid business communication.
+- **Chat Integration (Demo-Ready):**  
+  Intuitive chat UI, built to support future real-time negotiations and customer service.
+- **Simple, Elegant Design:**  
+  Professional Material UI in Nepali for seamless adoption.
+- **Business-Ready Localization:**  
+  Every user-facing element is in clear, standard Nepali.
+
+---
+
+## **How FarmConnect Drives Business Value**
+
+- **For Farmers:**  
+  - Sell directly to buyers and expand market reach.
+  - Build trusted business relationships.
+- **For Buyers:**  
+  - Source quality produce at fair prices.
+  - Streamlined procurement process—save time and money.
+- **For the Economy:**  
+  - Transparent digital records aid in scaling, analytics, and financial inclusion.
+  - Promotes rural entrepreneurship and digital transformation.
+
+---
+
+
+## **How to Run**
+
+1. **Install Flutter:** [Flutter Setup Guide](https://flutter.dev/docs/get-started/install)
+2. **Clone the Repository:**  
+   ```sh
+   git clone <repo-url>
+   cd <repo-folder>
+   ```
+3. **Install Dependencies:**  
+   ```sh
+   flutter pub get
+   ```
+4. **Run the App:**  
+   ```sh
+   flutter run
+   ```
+   > _Open on an Android/iOS device or emulator._
+
+
+
+## **Team**
+
+- **Lead Developer & Designer:** ks3891
+- **Contributors:** [Add team members]
+- **Contact:** [Your email or GitHub]
+
+
+---
