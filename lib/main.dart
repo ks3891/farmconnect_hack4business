@@ -33,6 +33,9 @@ import 'screens/crop_recommendation_screen.dart';
 // ✅ Import SplashScreen
 import 'screens/splash_screen.dart';
 
+// ✅ Import ChatScreen
+import 'screens/chat_screen.dart';
+
 void main() {
   runApp(const FarmConnectApp());
 }
@@ -87,15 +90,14 @@ class _FarmConnectAppState extends State<FarmConnectApp> {
         ),
       ),
       home: const SplashScreen(),
-
       routes: {
         '/create-account': (context) => const CreateAccountScreen(),
         '/forgot-password': (context) => const ForgotPasswordScreen(),
 
         // Farmer Routes with dynamic farmerName from arguments
         '/farmer': (context) {
-          final args =
-              ModalRoute.of(context)?.settings.arguments as Map<String, dynamic>?;
+          final args = ModalRoute.of(context)?.settings.arguments
+              as Map<String, dynamic>?;
 
           final farmerName = args != null && args['farmerName'] != null
               ? args['farmerName'] as String
@@ -118,15 +120,16 @@ class _FarmConnectAppState extends State<FarmConnectApp> {
             onMyCropsTap: () {
               Navigator.push(
                 context,
-                MaterialPageRoute(builder: (_) => MyCropsScreen(crops: _myCrops(farmerName))),
+                MaterialPageRoute(
+                    builder: (_) => MyCropsScreen(crops: _myCrops(farmerName))),
               );
             },
           );
         },
 
         '/farmer/profile': (context) {
-          final args =
-              ModalRoute.of(context)?.settings.arguments as Map<String, dynamic>?;
+          final args = ModalRoute.of(context)?.settings.arguments
+              as Map<String, dynamic>?;
 
           final farmerName = args != null && args['farmerName'] != null
               ? args['farmerName'] as String
@@ -156,6 +159,18 @@ class _FarmConnectAppState extends State<FarmConnectApp> {
         '/buyer/cart': (context) => MyCartScreen(cartItems: _buyerCart),
         '/buyer/order-history': (context) => const OrderHistoryScreen(),
         '/buyer/profile': (context) => const BuyerProfileScreen(),
+
+        // Chat Screen Route (New)
+        '/chat': (context) {
+          final args = ModalRoute.of(context)?.settings.arguments
+              as Map<String, dynamic>?;
+
+          final supplierName = args != null && args['supplierName'] != null
+              ? args['supplierName'] as String
+              : 'अज्ञात सप्लायर';
+
+          return ChatScreen(supplierName: supplierName);
+        },
 
         // Other Routes
         '/sustainability-settings': (context) =>

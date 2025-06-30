@@ -4,6 +4,7 @@ import '../../services/sustainability_service.dart';
 import 'dart:math';
 import 'smart_crop_recommendation.dart'; // ✅ Already added
 import 'crop_calendar_screen.dart'; // ✅ New import
+import 'chat_screen.dart'; // <-- Import ChatScreen (adjust path as needed)
 
 class FarmerDashboard extends StatelessWidget {
   final String farmerName;
@@ -50,6 +51,21 @@ class FarmerDashboard extends StatelessWidget {
             tooltip: "लगआउट",
             onPressed: () {
               Navigator.pushReplacementNamed(context, '/');
+            },
+          ),
+          // NEW: Chat Icon Button added here in AppBar
+          IconButton(
+            icon: const Icon(Icons.chat),
+            tooltip: "च्याट खोल्नुहोस्",
+            onPressed: () {
+              // Replace 'Supplier ABC' with actual supplier/farmer name if available
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) =>
+                      const ChatScreen(supplierName: 'Supplier ABC'),
+                ),
+              );
             },
           ),
         ],

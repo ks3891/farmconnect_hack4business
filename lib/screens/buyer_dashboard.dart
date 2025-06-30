@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'chat_screen.dart'; // <-- Import ChatScreen (adjust path if needed)
 
 class BuyerDashboard extends StatelessWidget {
   const BuyerDashboard({super.key});
@@ -15,6 +16,21 @@ class BuyerDashboard extends StatelessWidget {
               Navigator.pushReplacementNamed(context, '/');
             },
           ),
+          // NEW: Chat icon button added here
+          IconButton(
+            icon: const Icon(Icons.chat),
+            tooltip: "च्याट खोल्नुहोस्",
+            onPressed: () {
+              // Replace 'Supplier XYZ' with actual supplier name if available
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) =>
+                      const ChatScreen(supplierName: 'Supplier XYZ'),
+                ),
+              );
+            },
+          ),
         ],
       ),
       body: Padding(
@@ -26,7 +42,6 @@ class BuyerDashboard extends StatelessWidget {
               style: TextStyle(fontSize: 22, fontWeight: FontWeight.bold),
             ),
             const SizedBox(height: 20),
-
             _buildDashboardCard(
               context,
               icon: Icons.shopping_bag,
@@ -36,7 +51,6 @@ class BuyerDashboard extends StatelessWidget {
                 Navigator.pushNamed(context, '/buyer/browse');
               },
             ),
-
             _buildDashboardCard(
               context,
               icon: Icons.shopping_cart,
@@ -46,7 +60,6 @@ class BuyerDashboard extends StatelessWidget {
                 Navigator.pushNamed(context, '/buyer/cart');
               },
             ),
-
             _buildDashboardCard(
               context,
               icon: Icons.history,
@@ -56,7 +69,6 @@ class BuyerDashboard extends StatelessWidget {
                 Navigator.pushNamed(context, '/buyer/order-history');
               },
             ),
-
             _buildDashboardCard(
               context,
               icon: Icons.person,
@@ -66,7 +78,6 @@ class BuyerDashboard extends StatelessWidget {
                 Navigator.pushNamed(context, '/buyer/profile');
               },
             ),
-
             _buildDashboardCard(
               context,
               icon: Icons.map,
