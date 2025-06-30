@@ -9,6 +9,8 @@ dependencies:
   flutter:
     sdk: flutter
   cupertino_icons: ^1.0.2
+  table_calendar: ^3.0.9
+  nepali_date_picker: ^7.0.0
 
 dev_dependencies:
   flutter_test:

@@ -2,7 +2,8 @@ import 'package:flutter/material.dart';
 import '../../widgets/common/sustainability_badge_display.dart';
 import '../../services/sustainability_service.dart';
 import 'dart:math';
-import 'smart_crop_recommendation.dart'; // ✅ Added import
+import 'smart_crop_recommendation.dart'; // ✅ Already added
+import 'crop_calendar_screen.dart'; // ✅ New import
 
 class FarmerDashboard extends StatelessWidget {
   final String farmerName;
@@ -111,7 +112,6 @@ class FarmerDashboard extends StatelessWidget {
                     },
                   ),
                   _buildAnimatedDashboardCard(
-                    // ✅ New card for Smart Crop Recommendation
                     icon: Icons.agriculture,
                     label: 'स्मार्ट बाली सिफारिस',
                     color: Colors.teal,
@@ -121,6 +121,19 @@ class FarmerDashboard extends StatelessWidget {
                         MaterialPageRoute(
                           builder: (context) =>
                               const SmartCropRecommendationScreen(),
+                        ),
+                      );
+                    },
+                  ),
+                  _buildAnimatedDashboardCard(
+                    icon: Icons.calendar_today,
+                    label: 'बाली तालिका',
+                    color: Colors.brown,
+                    onTap: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => const CropCalendarScreen(),
                         ),
                       );
                     },
