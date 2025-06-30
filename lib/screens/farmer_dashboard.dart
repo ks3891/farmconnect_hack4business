@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import '../../widgets/common/sustainability_badge_display.dart';
 import '../../services/sustainability_service.dart';
 import 'dart:math';
+import 'smart_crop_recommendation.dart'; // ✅ Added import
 
 class FarmerDashboard extends StatelessWidget {
   final String farmerName;
@@ -26,8 +27,7 @@ class FarmerDashboard extends StatelessWidget {
   Widget build(BuildContext context) {
     final int sustainabilityScore = 65;
     final today = DateTime.now();
-    final String dateStr =
-        "${today.day}/${today.month}/${today.year}";
+    final String dateStr = "${today.day}/${today.month}/${today.year}";
     final String quote = _quotes[Random().nextInt(_quotes.length)];
 
     return Scaffold(
@@ -39,7 +39,6 @@ class FarmerDashboard extends StatelessWidget {
             icon: const Icon(Icons.refresh),
             tooltip: "रिफ्रेस गर्नुहोस्",
             onPressed: () {
-              // In real apps, trigger reload logic here.
               ScaffoldMessenger.of(context).showSnackBar(
                 const SnackBar(content: Text('ड्यासबोर्ड रिफ्रेस भयो!')),
               );
@@ -109,6 +108,21 @@ class FarmerDashboard extends StatelessWidget {
                     color: Colors.purple,
                     onTap: () {
                       Navigator.pushNamed(context, '/farmer/profile');
+                    },
+                  ),
+                  _buildAnimatedDashboardCard(
+                    // ✅ New card for Smart Crop Recommendation
+                    icon: Icons.agriculture,
+                    label: 'स्मार्ट बाली सिफारिस',
+                    color: Colors.teal,
+                    onTap: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) =>
+                              const SmartCropRecommendationScreen(),
+                        ),
+                      );
                     },
                   ),
                 ],
