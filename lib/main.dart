@@ -45,20 +45,17 @@ class FarmConnectApp extends StatefulWidget {
 }
 
 class _FarmConnectAppState extends State<FarmConnectApp> {
-  final String currentFarmerName = 'Demo Farmer';
   final List<Map<String, dynamic>> _allCrops = [];
   final List<Map<String, dynamic>> _buyerCart = [];
 
   void _addCrop(Map<String, dynamic> crop) {
     setState(() {
-      _allCrops.add({...crop, 'farmerName': currentFarmerName});
+      _allCrops.add(crop);
     });
   }
 
-  List<Map<String, dynamic>> get _myCrops {
-    return _allCrops
-        .where((crop) => crop['farmerName'] == currentFarmerName)
-        .toList();
+  List<Map<String, dynamic>> _myCrops(String farmerName) {
+    return _allCrops.where((crop) => crop['farmerName'] == farmerName).toList();
   }
 
   void _addToCart(Map<String, dynamic> crop) {
@@ -93,33 +90,57 @@ class _FarmConnectAppState extends State<FarmConnectApp> {
 
       routes: {
         '/create-account': (context) => const CreateAccountScreen(),
-        '/forgot-password': (context) =>
-            const ForgotPasswordScreen(), // ✅ Route added
-        // Farmer Routes
-        '/farmer': (context) => FarmerDashboard(
-          farmerName: currentFarmerName,
-          onAddCropTap: () {
-            Navigator.push(
-              context,
-              MaterialPageRoute(
-                builder: (_) => AddCropScreen(onAddCrop: _addCrop),
-              ),
-            );
-          },
-          onMyCropsTap: () {
-            Navigator.push(
-              context,
-              MaterialPageRoute(builder: (_) => MyCropsScreen(crops: _myCrops)),
-            );
-          },
-        ),
-        '/farmer/profile': (context) => FarmerProfileScreen(
-          name: currentFarmerName,
-          email: "demo@example.com",
-          phone: "9800000000",
-          location: "Kathmandu",
-          crops: "Tomato, Cabbage",
-        ),
+        '/forgot-password': (context) => const ForgotPasswordScreen(),
+
+        // Farmer Routes with dynamic farmerName from arguments
+        '/farmer': (context) {
+          final args =
+              ModalRoute.of(context)?.settings.arguments as Map<String, dynamic>?;
+
+          final farmerName = args != null && args['farmerName'] != null
+              ? args['farmerName'] as String
+              : 'अज्ञात किसान';
+
+          return FarmerDashboard(
+            farmerName: farmerName,
+            onAddCropTap: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (_) => AddCropScreen(
+                    onAddCrop: (crop) {
+                      _addCrop({...crop, 'farmerName': farmerName});
+                    },
+                  ),
+                ),
+              );
+            },
+            onMyCropsTap: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (_) => MyCropsScreen(crops: _myCrops(farmerName))),
+              );
+            },
+          );
+        },
+
+        '/farmer/profile': (context) {
+          final args =
+              ModalRoute.of(context)?.settings.arguments as Map<String, dynamic>?;
+
+          final farmerName = args != null && args['farmerName'] != null
+              ? args['farmerName'] as String
+              : 'अज्ञात किसान';
+
+          return FarmerProfileScreen(
+            name: farmerName,
+            email: "demo@example.com",
+            phone: "9800000000",
+            location: "Kathmandu",
+            crops: "Tomato, Cabbage",
+          );
+        },
+
         '/farmer/orders': (context) => const FarmerOrderScreen(),
 
         // Admin Routes

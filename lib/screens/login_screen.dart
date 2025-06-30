@@ -13,7 +13,6 @@ class _LoginScreenState extends State<LoginScreen> {
   String? _selectedRole;
   bool _obscurePassword = true;
 
-  // Unique green color palette
   static const Color _deepGreen = Color(0xFF227C49);
   static const Color _accentGreen = Color(0xFF9FE870);
   static const Color _inputGreen = Color(0xFFF2FFF6);
@@ -29,7 +28,6 @@ class _LoginScreenState extends State<LoginScreen> {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              // Simple logo avatar
               CircleAvatar(
                 radius: 34,
                 backgroundColor: _accentGreen,
@@ -69,12 +67,10 @@ class _LoginScreenState extends State<LoginScreen> {
                     )
                   ],
                 ),
-                padding:
-                    const EdgeInsets.symmetric(horizontal: 22, vertical: 30),
+                padding: const EdgeInsets.symmetric(horizontal: 22, vertical: 30),
                 child: Column(
                   children: [
-                    _buildTextField(
-                        _emailController, 'इमेल', Icons.email_outlined),
+                    _buildTextField(_emailController, 'इमेल', Icons.email_outlined),
                     const SizedBox(height: 14),
                     _buildPasswordField(),
                     const SizedBox(height: 14),
@@ -93,8 +89,7 @@ class _LoginScreenState extends State<LoginScreen> {
                           ),
                           elevation: 2,
                         ),
-                        child:
-                            const Text('लगइन', style: TextStyle(fontSize: 16)),
+                        child: const Text('लगइन', style: TextStyle(fontSize: 16)),
                       ),
                     ),
                   ],
@@ -102,27 +97,17 @@ class _LoginScreenState extends State<LoginScreen> {
               ),
               const SizedBox(height: 17),
               TextButton(
-                onPressed: () {
-                  Navigator.pushNamed(context, '/create-account');
-                },
+                onPressed: () => Navigator.pushNamed(context, '/create-account'),
                 child: Text(
                   "खाता सिर्जना गर्नुहोस्",
-                  style: TextStyle(
-                    color: _deepGreen,
-                    fontWeight: FontWeight.w600,
-                  ),
+                  style: TextStyle(color: _deepGreen, fontWeight: FontWeight.w600),
                 ),
               ),
               TextButton(
-                onPressed: () {
-                  Navigator.pushNamed(context, '/forgot-password');
-                },
+                onPressed: () => Navigator.pushNamed(context, '/forgot-password'),
                 child: Text(
                   "पासवर्ड बिर्सनुभयो?",
-                  style: TextStyle(
-                    color: _deepGreen,
-                    fontWeight: FontWeight.w600,
-                  ),
+                  style: TextStyle(color: _deepGreen, fontWeight: FontWeight.w600),
                 ),
               ),
             ],
@@ -132,12 +117,8 @@ class _LoginScreenState extends State<LoginScreen> {
     );
   }
 
-  Widget _buildTextField(
-    TextEditingController controller,
-    String label,
-    IconData icon, {
-    bool isPassword = false,
-  }) {
+  Widget _buildTextField(TextEditingController controller, String label, IconData icon,
+      {bool isPassword = false}) {
     return TextField(
       controller: controller,
       obscureText: isPassword,
@@ -154,8 +135,7 @@ class _LoginScreenState extends State<LoginScreen> {
         ),
         enabledBorder: OutlineInputBorder(
           borderRadius: BorderRadius.circular(8),
-          borderSide:
-              BorderSide(color: _borderGreen.withOpacity(0.35), width: 1),
+          borderSide: BorderSide(color: _borderGreen.withOpacity(0.35), width: 1),
         ),
         focusedBorder: OutlineInputBorder(
           borderRadius: BorderRadius.circular(8),
@@ -182,8 +162,7 @@ class _LoginScreenState extends State<LoginScreen> {
         ),
         enabledBorder: OutlineInputBorder(
           borderRadius: BorderRadius.circular(8),
-          borderSide:
-              BorderSide(color: _borderGreen.withOpacity(0.35), width: 1),
+          borderSide: BorderSide(color: _borderGreen.withOpacity(0.35), width: 1),
         ),
         focusedBorder: OutlineInputBorder(
           borderRadius: BorderRadius.circular(8),
@@ -223,8 +202,7 @@ class _LoginScreenState extends State<LoginScreen> {
         ),
         enabledBorder: OutlineInputBorder(
           borderRadius: BorderRadius.circular(8),
-          borderSide:
-              BorderSide(color: _borderGreen.withOpacity(0.35), width: 1),
+          borderSide: BorderSide(color: _borderGreen.withOpacity(0.35), width: 1),
         ),
         focusedBorder: OutlineInputBorder(
           borderRadius: BorderRadius.circular(8),
@@ -244,19 +222,47 @@ class _LoginScreenState extends State<LoginScreen> {
     if (email.isEmpty || password.isEmpty || _selectedRole == null) {
       ScaffoldMessenger.of(context).showSnackBar(
         const SnackBar(
-          content:
-              Text('कृपया सबै क्षेत्रहरू भर्नुहोस् र भूमिका चयन गर्नुहोस्'),
+          content: Text('कृपया सबै क्षेत्रहरू भर्नुहोस् र भूमिका चयन गर्नुहोस्'),
         ),
       );
       return;
     }
 
+    if (!email.endsWith('@gmail.com')) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(
+          content: Text('कृपया मान्य Gmail ठेगाना प्रविष्ट गर्नुहोस् (@gmail.com)'),
+        ),
+      );
+      return;
+    }
+
+    if (password.length < 8) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(
+          content: Text('पासवर्ड कम्तीमा ८ अक्षरको हुनुपर्छ'),
+        ),
+      );
+      return;
+    }
+
+    // Extract username from email before '@'
+    final userName = email.split('@')[0];
+
     if (_selectedRole == 'प्रशासक') {
       Navigator.pushReplacementNamed(context, '/admin');
     } else if (_selectedRole == 'ग्राहक') {
-      Navigator.pushReplacementNamed(context, '/buyer');
+      Navigator.pushReplacementNamed(
+        context,
+        '/buyer',
+        arguments: {'farmerName': userName}, // pass as farmerName key for consistency
+      );
     } else if (_selectedRole == 'कृषक') {
-      Navigator.pushReplacementNamed(context, '/farmer');
+      Navigator.pushReplacementNamed(
+        context,
+        '/farmer',
+        arguments: {'farmerName': userName},
+      );
     }
   }
 }

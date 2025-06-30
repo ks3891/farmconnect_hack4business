@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import '../services/session_manager.dart';  // <-- Import SessionManager
 
 class CreateAccountScreen extends StatefulWidget {
   const CreateAccountScreen({super.key});
@@ -35,16 +36,25 @@ class _CreateAccountScreenState extends State<CreateAccountScreen> {
       final phone = _phoneController.text.trim();
       final location = _locationController.text.trim();
 
-      // TODO: Save to backend later
+      // Save username in SessionManager singleton
+      SessionManager().loggedInUserName = name;
 
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(content: Text('$name को लागि खाता सिर्जना भयो')),
       );
 
       if (role == 'क्रेता') {
-        Navigator.pushReplacementNamed(context, '/buyer');
+        Navigator.pushReplacementNamed(
+          context,
+          '/buyer',
+          arguments: {'userName': name},
+        );
       } else if (role == 'आपूर्तिकर्ता') {
-        Navigator.pushReplacementNamed(context, '/farmer');
+        Navigator.pushReplacementNamed(
+          context,
+          '/farmer',
+          arguments: {'userName': name},
+        );
       }
     } else {
       ScaffoldMessenger.of(context).showSnackBar(
@@ -86,7 +96,7 @@ class _CreateAccountScreenState extends State<CreateAccountScreen> {
                   fillColor: Colors.white,
                 ),
                 validator: (value) =>
-                  value == null ? 'कृपया भूमिका चयन गर्नुहोस्' : null,
+                    value == null ? 'कृपया भूमिका चयन गर्नुहोस्' : null,
               ),
               const SizedBox(height: 30),
               ElevatedButton(
