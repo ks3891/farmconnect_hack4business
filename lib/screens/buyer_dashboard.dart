@@ -1,40 +1,47 @@
 import 'package:flutter/material.dart';
-import 'chat_screen.dart'; // <-- Import ChatScreen (adjust path if needed)
 
 class BuyerDashboard extends StatelessWidget {
   const BuyerDashboard({super.key});
+
+  Widget _buildDashboardCard(
+    BuildContext context, {
+    required IconData icon,
+    required String title,
+    required String subtitle,
+    required VoidCallback onTap,
+  }) {
+    return Card(
+      elevation: 3,
+      margin: const EdgeInsets.symmetric(vertical: 8, horizontal: 4),
+      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
+      child: ListTile(
+        leading: Icon(icon, size: 40, color: Colors.green),
+        title: Text(
+          title,
+          style: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+        ),
+        subtitle: Text(subtitle),
+        trailing: const Icon(Icons.arrow_forward_ios),
+        onTap: onTap,
+      ),
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('ग्राहक ड्यासबोर्ड'),
-        actions: [
-          IconButton(
-            icon: const Icon(Icons.logout),
-            onPressed: () {
-              Navigator.pushReplacementNamed(context, '/');
-            },
-          ),
-          // NEW: Chat icon button added here
-          IconButton(
-            icon: const Icon(Icons.chat),
-            tooltip: "च्याट खोल्नुहोस्",
-            onPressed: () {
-              // Replace 'Supplier XYZ' with actual supplier name if available
-              Navigator.push(
-                context,
-                MaterialPageRoute(
-                  builder: (context) =>
-                      const ChatScreen(supplierName: 'Supplier XYZ'),
-                ),
-              );
-            },
-          ),
-        ],
+        title: const Text('क्रेता ड्यासबोर्ड'),
+        centerTitle: true,
+        leading: IconButton(
+          icon: const Icon(Icons.arrow_back),
+          onPressed: () {
+            Navigator.pushReplacementNamed(context, '/');  // Navigate to login page
+          },
+        ),
       ),
       body: Padding(
-        padding: const EdgeInsets.all(16),
+        padding: const EdgeInsets.all(20),
         child: ListView(
           children: [
             const Text(
@@ -81,6 +88,15 @@ class BuyerDashboard extends StatelessWidget {
             _buildDashboardCard(
               context,
               icon: Icons.map,
+              title: 'नक्सा खोल्नुहोस्',
+              subtitle: 'नजिकका किसानहरू र बालीहरू हेर्नुहोस्',
+              onTap: () {
+                Navigator.pushNamed(context, '/map');
+              },
+            ),
+            _buildDashboardCard(
+              context,
+              icon: Icons.agriculture,
               title: 'बाली सिफारिसहरू',
               subtitle: 'क्षेत्र अनुसार सुझावहरू प्राप्त गर्नुहोस्',
               onTap: () {
@@ -89,27 +105,6 @@ class BuyerDashboard extends StatelessWidget {
             ),
           ],
         ),
-      ),
-    );
-  }
-
-  Widget _buildDashboardCard(
-    BuildContext context, {
-    required IconData icon,
-    required String title,
-    required String subtitle,
-    required VoidCallback onTap,
-  }) {
-    return Card(
-      margin: const EdgeInsets.symmetric(vertical: 10),
-      elevation: 3,
-      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
-      child: ListTile(
-        leading: Icon(icon, size: 32, color: Colors.green.shade700),
-        title: Text(title, style: const TextStyle(fontWeight: FontWeight.bold)),
-        subtitle: Text(subtitle),
-        trailing: const Icon(Icons.arrow_forward_ios),
-        onTap: onTap,
       ),
     );
   }

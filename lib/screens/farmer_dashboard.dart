@@ -5,6 +5,7 @@ import 'dart:math';
 import 'smart_crop_recommendation.dart'; // ✅ Already added
 import 'crop_calendar_screen.dart'; // ✅ New import
 import 'chat_screen.dart'; // <-- Import ChatScreen (adjust path as needed)
+import 'simple_map_screen.dart'; // <-- Added import for your map screen
 
 class FarmerDashboard extends StatelessWidget {
   final String farmerName;
@@ -58,7 +59,6 @@ class FarmerDashboard extends StatelessWidget {
             icon: const Icon(Icons.chat),
             tooltip: "च्याट खोल्नुहोस्",
             onPressed: () {
-              // Replace 'Supplier ABC' with actual supplier/farmer name if available
               Navigator.push(
                 context,
                 MaterialPageRoute(
@@ -125,6 +125,20 @@ class FarmerDashboard extends StatelessWidget {
                     color: Colors.purple,
                     onTap: () {
                       Navigator.pushNamed(context, '/farmer/profile');
+                    },
+                  ),
+                  // Added Map Card here
+                  _buildAnimatedDashboardCard(
+                    icon: Icons.map,
+                    label: 'नक्सा खोल्नुहोस्',
+                    color: Colors.blue,
+                    onTap: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => const SimpleMapScreen(),
+                        ),
+                      );
                     },
                   ),
                   _buildAnimatedDashboardCard(

@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 // Shared Screens
 import 'screens/login_screen.dart';
 import 'screens/create_account_screen.dart';
-import 'screens/forgot_password_screen.dart'; // ✅ Added import
+import 'screens/forgot_password_screen.dart';
 
 // Farmer Screens
 import 'screens/farmer_dashboard.dart';
@@ -27,14 +27,11 @@ import 'screens/order_history_screen.dart';
 import 'screens/buyer_profile_screen.dart';
 import 'screens/farmer_detail_screen.dart';
 
-// Others
+// Other Screens
 import 'screens/crop_recommendation_screen.dart';
-
-// ✅ Import SplashScreen
 import 'screens/splash_screen.dart';
-
-// ✅ Import ChatScreen
 import 'screens/chat_screen.dart';
+import 'screens/simple_map_screen.dart'; // ✅ Google Map screen
 
 void main() {
   runApp(const FarmConnectApp());
@@ -58,7 +55,9 @@ class _FarmConnectAppState extends State<FarmConnectApp> {
   }
 
   List<Map<String, dynamic>> _myCrops(String farmerName) {
-    return _allCrops.where((crop) => crop['farmerName'] == farmerName).toList();
+    return _allCrops
+        .where((crop) => crop['farmerName'] == farmerName)
+        .toList();
   }
 
   void _addToCart(Map<String, dynamic> crop) {
@@ -94,7 +93,7 @@ class _FarmConnectAppState extends State<FarmConnectApp> {
         '/create-account': (context) => const CreateAccountScreen(),
         '/forgot-password': (context) => const ForgotPasswordScreen(),
 
-        // Farmer Routes with dynamic farmerName from arguments
+        // Farmer Routes
         '/farmer': (context) {
           final args = ModalRoute.of(context)?.settings.arguments
               as Map<String, dynamic>?;
@@ -121,7 +120,9 @@ class _FarmConnectAppState extends State<FarmConnectApp> {
               Navigator.push(
                 context,
                 MaterialPageRoute(
-                    builder: (_) => MyCropsScreen(crops: _myCrops(farmerName))),
+                    builder: (_) => MyCropsScreen(
+                          crops: _myCrops(farmerName),
+                        )),
               );
             },
           );
@@ -160,7 +161,7 @@ class _FarmConnectAppState extends State<FarmConnectApp> {
         '/buyer/order-history': (context) => const OrderHistoryScreen(),
         '/buyer/profile': (context) => const BuyerProfileScreen(),
 
-        // Chat Screen Route (New)
+        // Chat
         '/chat': (context) {
           final args = ModalRoute.of(context)?.settings.arguments
               as Map<String, dynamic>?;
@@ -176,6 +177,9 @@ class _FarmConnectAppState extends State<FarmConnectApp> {
         '/sustainability-settings': (context) =>
             const SustainabilitySettingsScreen(),
         '/recommendations': (context) => const CropRecommendationScreen(),
+
+        // ✅ Google Map Route
+        '/map': (context) => const SimpleMapScreen(),
       },
     );
   }
