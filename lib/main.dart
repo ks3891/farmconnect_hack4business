@@ -12,6 +12,7 @@ import 'screens/add_crop_screen.dart';
 import 'screens/my_crops_screen.dart';
 import 'screens/farmer_order_screen.dart';
 import 'screens/sustainability_settings_screen.dart';
+import 'screens/farmer_blockchain_screen.dart'; // ✅ NEW: Blockchain screen import
 
 // Admin Screens
 import 'screens/admin_dashboard.dart';
@@ -90,37 +91,39 @@ class _FarmConnectAppState extends State<FarmConnectApp> {
         ),
       ),
       home: const SplashScreen(),
-
       routes: {
         '/create-account': (context) => const CreateAccountScreen(),
-        '/forgot-password': (context) =>
-            const ForgotPasswordScreen(), // ✅ Route added
+        '/forgot-password': (context) => const ForgotPasswordScreen(),
+
         // Farmer Routes
         '/farmer': (context) => FarmerDashboard(
-          farmerName: currentFarmerName,
-          onAddCropTap: () {
-            Navigator.push(
-              context,
-              MaterialPageRoute(
-                builder: (_) => AddCropScreen(onAddCrop: _addCrop),
-              ),
-            );
-          },
-          onMyCropsTap: () {
-            Navigator.push(
-              context,
-              MaterialPageRoute(builder: (_) => MyCropsScreen(crops: _myCrops)),
-            );
-          },
-        ),
+              farmerName: currentFarmerName,
+              onAddCropTap: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (_) => AddCropScreen(onAddCrop: _addCrop),
+                  ),
+                );
+              },
+              onMyCropsTap: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                      builder: (_) => MyCropsScreen(crops: _myCrops)),
+                );
+              },
+            ),
         '/farmer/profile': (context) => FarmerProfileScreen(
-          name: currentFarmerName,
-          email: "demo@example.com",
-          phone: "9800000000",
-          location: "Kathmandu",
-          crops: "Tomato, Cabbage",
-        ),
+              name: currentFarmerName,
+              email: "demo@example.com",
+              phone: "9800000000",
+              location: "Kathmandu",
+              crops: "Tomato, Cabbage",
+            ),
         '/farmer/orders': (context) => const FarmerOrderScreen(),
+        '/farmer/blockchain': (context) =>
+            const FarmerBlockchainScreen(), // ✅ NEW route
 
         // Admin Routes
         '/admin': (context) => const AdminDashboard(),

@@ -71,6 +71,15 @@ class FarmerDashboard extends StatelessWidget {
                       Navigator.pushNamed(context, '/farmer/profile');
                     },
                   ),
+                  // ✅ New Blockchain Records Card (Added without changing anything else)
+                  _buildDashboardCard(
+                    icon: Icons.lock,
+                    label: 'Blockchain Records',
+                    color: Colors.teal,
+                    onTap: () {
+                      Navigator.pushNamed(context, '/farmer/blockchain');
+                    },
+                  ),
                 ],
               ),
             ),
